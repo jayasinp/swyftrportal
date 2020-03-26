@@ -1,0 +1,75 @@
+<div>
+  <div class="dashboard-data">
+    <div class="col-xs-3">
+      <div class="data-widget error">
+        <div class="heading">
+          <img src="img/icons/calendar.svg" />
+          Scheduled Orders
+        </div>
+        <div class="value">
+          {{scheduleOrders.length || 0}}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      <button type="button" class="btn btn-success" (click)="refresh()">Refresh</button>
+    </div>
+
+    <!--<div class="col-xs-3">-->
+      <!--<div class="data-widget pickup-items">-->
+        <!--<div class="heading">-->
+          <!--<img src="img/icons/scooter.svg" />-->
+          <!--Pickups pending-->
+        <!--</div>-->
+        <!--<div class="value">-->
+          <!--04-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+      <!--<div class="data-widget item-list">-->
+        <!--<div class="heading">-->
+          <!--<img src="img/icons/medical-notes-symbol-of-a-list-paper-on-a-clipboard.svg" />-->
+          <!--Items at Low-->
+        <!--</div>-->
+        <!--<div class="value">-->
+          <!--04-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="clearfix"></div>
+  </div>
+  <div class="content-cover ">
+    <div class="wide-container ">
+      <div class="kanban">
+        <div class="scroller" *ngIf="orderObj">
+
+          <kanban-column (onChangeChildOrder)="onChildStatusChanged($event)" [heading]="'New'" [confirmStatus]="'ACCP'" [cancelEnable]="true" [highPriorityOrders]="[]" [normalPriorityOrders]="orderObj[statusConsts.INIT]" [confirmButton]="'Accept'"></kanban-column>
+          <kanban-column (onChangeChildOrder)="onChildStatusChanged($event)" [heading]="'Accepted'" [confirmStatus]="'READY_TO_PICKUP'" [cancelEnable]="true"[cancelEnable]="true" [highPriorityOrders]="[]" [normalPriorityOrders]="orderObj[statusConsts.ACCP]" [confirmButton]="'Pickup Ready'"></kanban-column>
+          <kanban-column (onChangeChildOrder)="onChildStatusChanged($event)" [heading]="'Pickup Ready'" [highPriorityOrders]="[]" [cancelEnable]="false" [normalPriorityOrders]="orderObj[statusConsts.READY_TO_PICKUP]" ></kanban-column>
+          <kanban-column (onChangeChildOrder)="onChildStatusChanged($event)" [heading]="'Dispatched'" [highPriorityOrders]="[]" [cancelEnable]="false" [normalPriorityOrders]="orderObj[statusConsts.DISPATCH]" ></kanban-column>
+          <kanban-column (onChangeChildOrder)="onChildStatusChanged($event)" [heading]="'Delivered'" [highPriorityOrders]="[]" [cancelEnable]="false" [normalPriorityOrders]="orderObj[statusConsts.DELI]" ></kanban-column>
+
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-dialog [(visible)]="showScheduledDialog['show']" [width]="30" [height]="20" [resizable]="false">
+  <dialog-header><h5 style="color: white">Scheduled Order Activated</h5></dialog-header>
+  <dialog-body>
+    <div class="card">
+      <div class="card-body" style="padding: 1em">
+        <h4 class="card-text">{{showScheduledDialog.description}} </h4>
+
+        <a class="btn btn-default" (click)="closeDialog()">Ok</a>
+      </div>
+    </div>
+  </dialog-body>
+</app-dialog>

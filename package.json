@@ -1,0 +1,124 @@
+{
+  "name": "swftr",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "quick-start": "NODE_ENV='PROD' node dist/server.js",
+    "build": "npm run clean && npm install && npm run express:build && npm run ng:copy && npm run email:copy",
+    "build:watch": "npm-watch express:build",
+    "start": "npm run build && npm run quick-start",
+    "start:watch": "npm-watch express",
+    "express:build": "gulp babel-source-maps",
+    "express:build:watch": "npm-watch express:build",
+    "express": "npm run express:build && npm run quick-start",
+    "express:watch": "npm-watch express",
+    "eslint": "eslint 'src/**/*.js'",
+    "eslint-test": "eslint 'tests/**/*.js' --fix",
+    "eslint-fix": "eslint 'src/**/*.js' --fix",
+    "lint-staged": "lint-staged",
+    "git-uncommited-changes": "git diff --quiet --cached",
+    "git-unstaged-changes": "git diff --quiet",
+    "git-branch": "bash git-hooks/branch.sh",
+    "esdoc": "esdoc",
+    "clean": "rm -rf dist/",
+    "test:node": "NODE_ENV='TEST' mocha --compilers js:babel-core/register --reporter spec  --timeout 10000 --recursive ",
+    "test": "npm run test:node",
+    "ng:clean": "rm -rf public/dist",
+    "ng:prepare": "npm run ng:clean && cd public && npm install && ng build",
+    "ng:copy": "npm run ng:prepare && mkdir -p dist/public && cp -r public/dist/* dist/public",
+    "email:copy": "mkdir -p dist/public/email-content && cp public/email-content/* dist/public/email-content"
+  },
+  "watch": {
+    "express": {
+      "patterns": [
+        "public/src/uploads/*",
+        "public/src/*",
+        "public/*",
+        "src/app/**/*",
+        "src/utils/**/*",
+        "src/*"
+      ],
+      "extensions": "js",
+      "quiet": true
+    },
+    "express:build": {
+      "patterns": [
+        "public/src/*",
+        "src/app/**/*",
+        "src/utils/**/*",
+        "src/app.js",
+        "src/daemon.js",
+        "src/server.js"
+      ],
+      "extensions": "js",
+      "quiet": true
+    },
+    "quick-start": {
+      "patterns": [
+        "dist/**/*",
+        "public/src/*"
+      ],
+      "extensions": "js",
+      "quiet": true
+    }
+  },
+  "dependencies": {
+    "async": "2.6.0",
+    "body-parser": "^1.19.0",
+    "bunyan": "1.8.5",
+    "bunyan-format": "0.2.1",
+    "busboy": "^0.3.1",
+    "cookie-parser": "1.4.3",
+    "cors": "^2.8.4",
+    "crypto": "1.0.1",
+    "express": "^4.17.1",
+    "express-fileupload": "0.4.0",
+    "express-logging": "1.1.1",
+    "express-session": "1.15.6",
+    "fcm-push": "1.1.3",
+    "file-saver": "^2.0.2",
+    "firebase": "^5.3.0",
+    "geofirestore": "^2.0.0",
+    "geolib": "^2.0.24",
+    "mocha": "3.2.0",
+    "multer": "^1.4.2",
+    "mysql": "2.14.1",
+    "ng2-file-upload": "^1.4.0",
+    "nodemailer": "4.4.0",
+    "passport": "0.4.0",
+    "passport-token": "0.2.0",
+    "qr-image": "3.2.0",
+    "underscore": "1.8.3",
+    "unirest": "0.5.1",
+    "uuid": "3.3.2"
+  },
+  "devDependencies": {
+    "babel-preset-node6": "^11.0.0",
+    "babili": "0.0.11",
+    "chai": "^3.5.0",
+    "esdoc": "^0.5.2",
+    "eslint": "^3.19.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "lint-staged": "^3.3.1",
+    "lite-server": "^2.5.4",
+    "npm-watch": "^0.1.9",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
+    "pump": "latest",
+    "source-map-support": "latest"
+  },
+  "pre-commit": [
+    "git-branch",
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

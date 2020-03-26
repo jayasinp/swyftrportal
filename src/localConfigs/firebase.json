@@ -1,0 +1,20 @@
+{
+  "fpn": {
+    "serverKey": "AAAANTXL2Vs:APA91bEn9N_GTQZAD1mKT8b522zf1SPvwGYrQ97Bku05q1_Xr1RjDPzupTPQG-fcZJBWbqUcJfWV-VTvan3_AkQQDmB2FosfzX-72gjqgpRZ_X5n_HlooxfFuuHNEMcBWEhQYamLMJMM",
+    "senderId": "228535818587"
+  },
+  "firestore": {
+    "type": "service_account",
+    "project_id": "swyftrios",
+    "private_key_id": "2e2238780c63519ace6e03c2f6988ee7c65d1881",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC1VTyarOBNDwZy\nqZwhboP5le3xwC0zDh1xxqcOuKHgh8tqVlw1DWFsBzLiL5eUoh3ZAom6UlIPMGse\nEoHT0timz5R1h2uoESz8yJeFDdlJbpaKSegvUQvGKTYPc6lBP1QqMHXRxmmnNgYs\n4kuDT7ZGucs6S9v28+qvEMpRK4WAQ4STMtn3+HTVSZiGV4G547KNvmvJxNxiArNd\nm9CWvozfqse71RONZArLUsG3OXgaCVhzCsDsvcXLsL0BaSq2SUupfJfWZibvzZJn\nkhXYQ/d3yFpJucZl0Ws71V2NbksbQBJmIR3qVebWeqE0Nhb/AN+S2EsqHWlNEvQO\n8+flwuJ5AgMBAAECggEABhapFMZ2N5AoFsSEJgk4bDJxDVt3CQ5Rxca2SEPBx7C3\nj0f8C5n56e8p8bdIXyi8WNOBfVyTPchR6G4Vpt+e/6bbpMCZyEhfWtN/ZuvKnnEU\no+sMXT5a51nt40Hubm7qbAo5goQnewJQ3cPxZiTQiXpmjPwMFDQnbp5hNK2B64cK\nXdVo8xpsK3ZJxi3D5b6WAaC5RM6uLp0d2noRt1f+bHCIHnHm1sOX/O4IX7PQkFlH\n0su30MUSH/rmYXA3ze57E7gayIG3DrOk+/Ah+VFqLbxHjlVppkEJWdkMp/FW4Ocl\nZ8ct2Ft34u0lvyuqBByHKJlKkeiv1YaE4EtJKST2KQKBgQDZxWrpN45lvjHA1xHW\nwsLBqdBcGsQBVgBwJRg1CXqXXAwxbCi68BjMwvWJpYq271cZ9OHmEMjmxgCRQR95\ndp3LGYsbcK5AmopDnieXvqdNOKn2PYYEwoGRNFnB0SqZFVtyQBdrCumeN8n0tl0o\nIi2dUuUX6YxQLqsqMF0FOycODQKBgQDVKkuLA2GXvd4NuiUkiV3Qdy+hGfs260iI\nuKsjyvU5z9NW2hyx4koqfDvLf8Ybe80n+QHAr0vYcXjAn5XsVKK3vbNrdRM3i800\nMbLdU+jsqFm/PiwySoZmz4lHCveS0QPThTEfaT8ACaiCkr2DkVE4dnW1/e8R/1xI\nWYn6LLe3HQKBgFhpZOlAK+i0meBvsIdfVNBpT/VEzJS6RL1C4hwOOB4hObYK8lJK\nzda7xBHZCoMQkm0wVVIhOF8wveQ66ztV4+Qj/6zpR2VlGIMxP2PE/IlGWwJkofdm\nvFGmTlZ4w/GYkSLGUHud15Drl2tpalKz5Y78q5PUtqmK+OTM88b+5/E1AoGAcIsB\nEWb6mqvS1fqGa7DeyBZ1HiBigs9cH1soeCBKsngoQ32qkrw/ngizZTCTvqTxXv5X\nz4x9hcv7De/zrq/MrSfJ150bRUNZVwo6PiJ0IqaLo63GldLE/PjrqIeAyJHz7DQx\nCD1/1pxCzJV+2zzY3e+lHC3yj9T7uvMTJvN/F30CgYAvoy0FKMSWVcu2iz0ImEDr\nhpwfH7Te9YhHFrzkqdq9R7nTkoxwSmrXmuxs8DHta+qAIhi5JCV45vUWeldw/q+t\nRF3HfMrhbiuq4YVvpFKZv1Ofj6hXwbktVeWckZK3Z2R4GmANden7ITbwQg+higUK\nzZi90jCEt3wssCHnfHeCqQ==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-gtn85@swyftrios.iam.gserviceaccount.com",
+    "client_id": "108083758074477259165",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-gtn85%40swyftrios.iam.gserviceaccount.com",
+    "databaseURL": "https://swyftrios.firebaseio.com",
+    "projectId": "swyftrios"
+  }
+}

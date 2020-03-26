@@ -1,0 +1,84 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1><a [routerLink]="['manage-riders']" >Rider List</a></h1>
+    </div>
+    <nav class="navbar " *ngIf="loginUser.userType === 'rider'">
+      <h2 class="pull-left spacing-3"><a [routerLink]="['/home/manage-riders']" >Manage Riders</a></h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{rider.firstName}} {{rider.lastName}}</h2>
+      <ul class="nav tab-navigator">
+        <li class="active"><a data-toggle="tab" href="#overview" (click)="selectTab(0)">Overview</a></li>
+      </ul>
+    </nav>
+    <nav class="navbar " *ngIf="loginUser.userType === 'swyftr' || loginUser.userType === 'partner'">
+      <h2 class="pull-left spacing-3"><a>Partners</a></h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{rider.firstName}} {{rider.lastName}}</h2>
+      <ul class="nav tab-navigator">
+        <li class="active"><a data-toggle="tab" href="#overview" (click)="selectTab(0)">Overview</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="content-cover" style="max-height: 100%" >
+  <div class="wide-container user-profile">
+    <div class="user-details">
+      <div class="profile-image">
+        <img *ngIf="!customerProfilePicture" src="img/default_profile_picture.jpg" />
+        <img *ngIf="customerProfilePicture" src="data:{{partnerLogo.fileType}};base64,{{partnerLogo.data}}" />
+      </div>
+      <div class="user-name">
+        <h3>{{rider.firstName}} {{rider.lastName}}</h3>
+      </div>
+      <div class="profile-data">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Details</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="data-set">
+              <h6>NIC</h6>
+              <p>{{rider.nic}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Mobile Number</h6>
+              <p>{{rider.mobileNumber}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Email</h6>
+              <p>{{rider.email}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Address</h6>
+              <p>{{rider.address}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Licence No.</h6>
+              <p>{{rider.license}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Vehicle Driving</h6>
+              <p>{{rider.vehicalNo}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <tabset #storeTabs>
+        <tab heading="Overview">
+          <div class="row" style="height: 20em">
+            <app-show-rider-marker [points]="riderLocationArr"></app-show-rider-marker>
+          </div>
+          <div class="row">
+            <app-order-table [riderManagerOrderArray]="riderOdersArr"></app-order-table>
+          </div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

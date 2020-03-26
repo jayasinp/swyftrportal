@@ -1,0 +1,94 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>
+        <a [routerLink]="['manage-partners']">Partners</a>
+      </h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">
+        <a [routerLink]="['/home/manage-partners']">Partner</a>
+      </h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{partner.name}}</h2>
+      <ul class="nav tab-navigator">
+        <li class="active">
+          <a data-toggle="tab" href="#overview" (click)="selectTab(0)">Overview</a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#storeDetails" (click)="selectTab(1)">
+            <span *ngIf="partner.orgType === 'partner_store' || partner.orgType === 'partner_supplier'"> Store</span>
+            <span *ngIf="partner.orgType === 'partner_rider'"> Rider</span>
+            Details</a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#reports" (click)="selectTab(2)">Reports</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="content-cover" style="max-height: 100%">
+  <div class="wide-container user-profile">
+    <div class="user-details">
+      <div class="profile-image">
+        <img *ngIf="!partnerLogo" src="img/default_company_logo.png" />
+   
+        <img class="image" *ngIf="partnerLogo" src="uploads/{{partnerLogo.fileGivenName}}" />
+      </div>
+      <div class="user-name">
+        <h3>{{partner.name}}</h3>
+        <span>
+          <b>Type : </b> {{getPartnerType(partner)}} </span>
+      </div>
+      <div class="profile-data">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#home">Details</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="data-set">
+              <h6>Head Office Address</h6>
+              <p>{{partner.headOfficeAddress}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Head Office Contact No</h6>
+              <p>{{partner.headOfficeContactNo}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Partner Appointed Contact Persons's Name</h6>
+              <p>{{partner.pointOfContactName}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Partner Appointed Contact Persons's Mobile</h6>
+              <p>{{partner.pointOfContactMobile}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Preferred Payment Method</h6>
+              <p>{{getPreferedPaymentMethodText(partner.preferedPaymentMethod)}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <tabset #partnerTabs>
+        <tab heading="Overview">
+          <app-partner-overview></app-partner-overview>
+        </tab>
+        <tab heading="Details">
+          <app-stores *ngIf="partner.orgType === 'partner_store' || partner.orgType === 'partner_supplier'" [stores]="stores" [partner]="partner"></app-stores>
+          <app-rider-list *ngIf="partner.orgType === 'partner_rider'" [partner]="partner" [riders]="riders"></app-rider-list>
+        </tab>
+        <tab heading="Product Reports">
+          <app-partner-reports [partner]="partner" [reports]="reports"></app-partner-reports>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

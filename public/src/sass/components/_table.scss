@@ -1,0 +1,277 @@
+.tabs-cover {
+	margin: 40px 0;
+	margin-top: 0;
+}   
+
+.page-title{
+	padding: 20px 0;
+}
+
+.tab-links {
+	background: #fff;
+	-webkit-box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);
+	box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);		
+	ul{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li{
+			float: left;
+			&.active{
+				a{
+					background: #293649;
+					color: #fff;
+					padding: 29px 35px 21px;
+					margin-top: -10px;
+					font-weight: 800;
+				}
+			}
+		}
+		a{
+			padding: 20px;
+			display: block;
+			text-transform: uppercase;
+			font-size: 14px;
+			color: $dark-grey;
+			font-weight: 400;
+			&:hover{
+				background: $light-grey;
+			}
+		}
+	}
+}
+
+
+.paginations{
+	nav  {
+		text-align: center;
+		@include respond-to(medium) { 
+			
+			float: right;
+		}
+	}
+	.pagination{
+		> li {
+			a{
+				border-radius: 32px;
+				margin: 0 2px;
+				color: #3B5167;
+
+			}
+			&.round{
+				a{
+					border-radius: 100%;	
+
+				}
+			}
+		}
+	} 
+	.items-left{
+		
+		padding: 10px;
+		text-align: center;
+		@include respond-to(medium) { 
+			padding: 25px;
+			float: right;
+		}	
+	}
+}
+
+.dataTables_length, .dataTables_filter {
+	padding: 20px;
+
+}
+.table{
+	background: #fff; 
+	margin: 0;
+	-webkit-box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);
+	box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);	
+
+
+	&.table-responsive{
+		display: block;
+		@include respond-to(medium) { 
+			display: table;
+		}	
+	} 
+
+	&.dataTable{
+		&.no-footer{
+			border-bottom: 0;
+		}
+	}
+
+	.chek-td{
+		width: 20px;
+	}
+
+	.action-panel{
+		width: 272px;
+		margin: -7px 0;
+		margin-left: -14px;
+		.btn{
+			background: none;
+			border: 0;
+			color: $dark-grey;
+			padding: 10px ;
+
+			&.btn-danger{
+				color: #ce272d;
+			}
+			&.btn-success {
+				color: #219653; 
+			}
+
+		}
+	}
+	.checkbox{
+		margin: 5px 0 4px 13px;
+	}
+	.select-box {
+		display: block;
+		width: 100%;
+		padding: 5px;
+		margin: -5px 0;
+		border: 1px solid $input-border;
+	}
+	thead.filters{
+		background: #efefef;
+		tr{
+			th{
+				padding: 18px 10px;
+				border: 0;
+			}
+		}
+		input{
+			display: block;
+			width: 100%;
+			height: 30px;
+			border: 1px solid $input-border;
+		}
+
+	}
+	thead.plain{
+		background: #fff;
+
+		th{
+			border-bottom: 0;
+			padding: 15px 10px;
+			padding-right: 20px; 
+
+			color: $mid-grey;
+			font-weight: 600;
+			border-bottom: 1px solid $light-grey;
+		}		
+	}
+
+	tbody{
+		tr{
+			td{
+				padding: 15px !important;
+				vertical-align: center; 
+				border: 0;
+				&.state{
+					color: green;
+					font-weight: 600; 
+				}
+			}	
+
+			span{
+				display: block;
+				font-size: 12px;
+				font-weight: 200;
+				opacity: 0.8;
+			}	
+			&.critical{
+				color: red;
+				td{
+					&.state{
+						color: red; 
+					}					
+				}
+
+			}
+			a{
+				color: inherit;
+				display: block
+			}
+		}
+	}
+}
+.dataTables_filter{
+	padding: 0 0 0 0;
+	margin-bottom: 10px;	
+	input{
+		border-radius: 30px;
+		height: 40px;
+		border: 1px solid $light-grey;
+		outline: none;
+		padding: 10px 20px;
+	}
+	label{
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+}
+
+.dataTables_length{
+	padding: 10px 0;
+	margin-bottom: 10px;
+ 	select{
+ 		margin: 0 5px;
+ 		width: 60px;
+ 		height: 35px;
+ 		border-radius: 4px;
+ 		border: 1px solid $light-grey;
+ 	}
+}
+
+.page-title{
+	h3{
+		text-transform: capitalize;
+		font-weight: 600;
+	}
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+	    border-radius: 100%;
+}
+.dataTables_paginate, .dataTables_wrapper .dataTables_info{
+	padding: 20px 0 !important;
+}
+
+
+
+.add-button {
+	margin: 13px; 
+	border-radius: 40px;
+	padding: 6px 20px;
+	padding-left: 40px;
+	position: relative;
+	font-weight: 200;
+	.fa{
+		position: absolute;
+		left: 15px;
+		top: 9px;
+	}
+}
+
+
+.widget {
+	padding: 20px;
+	background: #fff;
+	text-align: center;
+-webkit-box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);
+box-shadow: 1px 1px 5px 0 rgba(000,000,000,0.2);	
+
+	h3{
+		font-size: 16px;
+
+	}
+	h2{
+		font-size: 60px;
+		font-weight: 200;
+	}
+
+}

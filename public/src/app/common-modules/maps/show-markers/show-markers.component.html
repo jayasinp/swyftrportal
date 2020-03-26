@@ -1,0 +1,5 @@
+<ngui-map zoom="15" center="{{center}}" [geoFallbackCenter]="[6.869761, 79.873438]">
+  <marker *ngFor="let point of points" [position]="point"></marker>
+</ngui-map>
+
+<!--<button [disabled]="overlayList?.length == 0" md-raised-button color="warn" (click)="deleteSelectedOverlay()" >Delete</button>-->

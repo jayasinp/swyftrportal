@@ -1,0 +1,9 @@
+CREATE TABLE `ORDER_BRANCH_STOCK` (
+  `order_id` bigint(20) NOT NULL,
+  `branch_stock_id` int(11) NOT NULL,
+  `quantity` double DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`branch_stock_id`),
+  KEY `fk_ORDER_BRANCH_STOCK_1_idx` (`branch_stock_id`),
+  CONSTRAINT `fk_ORDER_BRANCH_STOCK_1` FOREIGN KEY (`order_id`) REFERENCES `ORDER` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ORDER_BRANCH_STOCK_2` FOREIGN KEY (`branch_stock_id`) REFERENCES `BRANCH_STOCK` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

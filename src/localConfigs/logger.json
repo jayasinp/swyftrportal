@@ -1,0 +1,23 @@
+{
+  "PROD": {
+    "name": "swyftr",
+    "src":false,
+    "streams": [],
+    "console-log": false,
+    "level" : "error"
+  },
+  "DEV": {
+    "name": "swyftr",
+    "src":false,
+    "streams": [],
+    "console-log": true,
+    "level" : "error"
+  },
+  "LOCAL": {
+    "name": "swyftr",
+    "src":false,
+    "streams": [],
+    "console-log": true,
+    "level" : "trace"
+  }
+}

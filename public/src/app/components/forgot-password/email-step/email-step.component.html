@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="login-page get-height">
+    <div class="login-form panel panel-default">
+      <div class="panel-body form text-center">
+        <div class="logo-cover">
+          <img src="img/logo.png" />
+        </div>
+        <div class="heading">
+          <h5>Request Rest Passsword</h5>
+        </div>
+
+        <div class="form-group" [class.has-error]="!emailFormCntrl.valid">
+          <input type="text" class="form-control" [(ngModel)]="email" [formControl]="emailFormCntrl">
+          <div class="validation-messege error" *ngIf="!emailFormCntrl.valid">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Valid email address required
+          </div>
+        </div>
+
+        <button type="button" *ngIf="!isSendButtonClicked" (click)="requestResetPassword()" class="btn btn-primary btn-block">Request Reset Password</button>
+        <button type="button" *ngIf="isSendButtonClicked" class="btn btn-primary btn-block">
+          <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Connecting...
+        </button>
+        <button type="button" (click)="back()" class="btn btn-primary btn-block">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

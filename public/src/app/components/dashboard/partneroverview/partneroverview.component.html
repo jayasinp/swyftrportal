@@ -1,0 +1,12 @@
+  <div class="piechart-section" *ngIf="showChart">
+        <H2>Last 30 Days Summary</H2>
+        <ngx-charts-pie-grid
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="pieChartArr">
+      </ngx-charts-pie-grid>
+  </div>
+
+  <div class="piechart-section" *ngIf="!showChart">
+    <p>No Data Found</p>
+  </div>

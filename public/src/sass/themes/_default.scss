@@ -1,0 +1,30 @@
+// -----------------------------------------------------------------------------
+// When having several themes, this file contains everything related to the
+// default one.
+// -----------------------------------------------------------------------------
+
+.dataTables_paginate {
+  nav  {
+    text-align: center;
+    @include respond-to(medium) {
+
+      float: right;
+    }
+  }
+  .paginate_button {
+    a{
+      border-radius: 32px;
+      margin: 0 2px;
+      color: #3B5167;
+
+    }
+
+    .previous {
+      border-radius: 100%;
+    }
+
+    .next {
+      border-radius: 100%;
+    }
+  }
+}

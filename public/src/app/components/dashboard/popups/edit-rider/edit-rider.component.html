@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()" >&times;</button>
+  <h4>Update {{riderUser.firstName}} {{riderUser.lastName}}</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+
+    <div class="form-group"  [class.has-error]="!licenseNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.license" [formControl]="licenseNoCntrl">
+      <label>Licence No.</label>
+      <div class="validation-messege error" *ngIf="!licenseNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Licence No. Is Required
+      </div>
+    </div>
+
+    <div class="form-group"  [class.has-error]="!vehicleNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.vehicalNo" [formControl]="vehicleNoCntrl">
+      <label>Vehicle No.</label>
+      <div class="validation-messege error" *ngIf="!vehicleNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Vehicle No. Is Required
+      </div>
+    </div>
+
+    <div class="form-group"  [class.has-error]="!addressCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.address" [formControl]="addressCntrl">
+      <label>Address</label>
+      <div class="validation-messege error" *ngIf="!addressCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Address Is Required
+      </div>
+    </div>
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!updateButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="editRider()" >Update</button>
+      <button type="submit" *ngIf="updateButtonClicked" class="btn btn-default form-buttons inline-btn" >
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Updating Rider...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()" >Cancel</button>
+    </div>
+  </div>
+</div>

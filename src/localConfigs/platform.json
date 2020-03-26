@@ -1,0 +1,14 @@
+{
+  "ENV": "local",
+  "SSL_CONFIG": "LOCAL",
+  "LOGGER_CONFIG": "LOCAL",
+  "HTTPS_PORT": 7788,
+  "CERTIFICATES": {
+    "KEY": "key.key",
+    "CERT": "certificate.crt",
+    "CA": "bundle.crt"
+  },
+  "SOURCE_MAPS_SUPPORT": true,
+  "EXTERNAL_API_TIMEOUT": 10000,
+  "HOST": "http://swyftrstore.com"
+}

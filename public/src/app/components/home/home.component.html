@@ -1,0 +1,4 @@
+<div>
+  <login *ngIf="!isAuthenticated()" ></login>
+  <app-dashboard *ngIf="isAuthenticated()" (onLogout)="onLogout()" ></app-dashboard>
+</div>

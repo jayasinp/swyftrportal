@@ -1,0 +1,2 @@
+ALTER TABLE `PROFILE` 
+ADD COLUMN `otp_retry_count` INT NULL DEFAULT 0;

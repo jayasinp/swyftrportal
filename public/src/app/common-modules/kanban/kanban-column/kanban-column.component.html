@@ -1,0 +1,14 @@
+<div class="column">
+  <div class="heading">
+    {{heading}}
+    <span>{{normalPriorityOrders.length + highPriorityOrders.length}} Orders | {{highPriorityOrders.length}} High Priority</span>
+  </div>
+
+  <order-item *ngFor="let highPOrder of highPriorityOrders" [order]="highPOrder" [confirmButton]="confirmButton"
+    [confirmStatus]="confirmStatus" [cancelEnable]="cancelEnable" (statusChanged)="onChildChanged($event)">
+  </order-item>
+  <order-item *ngFor="let normalPOrder of normalPriorityOrders" [order]="normalPOrder" [confirmButton]="confirmButton"
+    [confirmStatus]="confirmStatus" [cancelEnable]="cancelEnable" (statusChanged)="onChildChanged($event)">
+  </order-item>
+
+</div>

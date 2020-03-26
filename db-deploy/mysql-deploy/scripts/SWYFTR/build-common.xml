@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SWYFTR DB Deployment" default="update">
+
+<property file="../../config/build.properties" />
+
+    <path id="mysql.classpath">
+        <fileset dir="../../../../lib">
+            <include name="mysql-connector-java-*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="dbdeploy.classpath">
+        <!-- include the dbdeploy-ant jar -->
+        <fileset dir="../../../../lib">
+            <include name="dbdeploy-ant-*.jar"/>
+        </fileset>
+
+        <!-- the dbdeploy task also needs the database driver jar on the classpath -->
+        <path refid="mysql.classpath" />
+
+    </path>
+
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+
+    <target name="update" description="">
+       <dbdeploy driver="${db.driver}" url="${swyftr.db.url}"
+                  userid="${sqluser}"
+                  password="${sqlpass}"
+                  dir="./deltas"
+                />
+       <dbdeploy driver="${db.driver}" url="${swyftr.db.url}"
+                  userid="${sqluser}"
+                  password="${sqlpass}"
+                  delimiter="|"
+                  dir="procedures"
+                />
+    </target>
+
+    <target name="rollback" description="rollback 6.1.3 changes">
+        <sql driver="${db.driver}" url="${swyftr.db.url}"
+             userid="${sqluser}" password="${sqlpass}" classpathref="mysql.classpath" >
+            <fileset file="./rollback/rollback.sql"/>
+        </sql>
+
+    </target>
+</project>

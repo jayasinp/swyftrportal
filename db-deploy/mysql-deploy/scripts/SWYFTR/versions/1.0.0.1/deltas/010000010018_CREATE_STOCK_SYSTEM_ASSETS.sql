@@ -1,0 +1,16 @@
+CREATE TABLE `STOCK_SYSTEM_ASSETS` (
+  `stock_id` INT NOT NULL,
+  `system_asset_id` BIGINT(20) NOT NULL,
+  `added_date` BIGINT(20) NULL,
+  PRIMARY KEY (`stock_id`, `system_asset_id`),
+  INDEX `fk2_STOCK_SYSTEM_ASSETS_idx` (`system_asset_id` ASC),
+  CONSTRAINT `fk1_STOCK_SYSTEM_ASSETS`
+    FOREIGN KEY (`stock_id`)
+    REFERENCES `BRANCH_STOCK` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk2_STOCK_SYSTEM_ASSETS`
+    FOREIGN KEY (`system_asset_id`)
+    REFERENCES `SYSTEM_ASSETS` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)ENGINE=InnoDB;

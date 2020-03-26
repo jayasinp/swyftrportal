@@ -1,0 +1,18 @@
+<svg width="19" height="18" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>history-clock-button</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(688 -938)">
+<g id="history-clock-button">
+<g id="Group">
+<g id="history">
+<g id="Vector" opacity="0.9">
+<use xlink:href="#path0_fill" transform="matrix(1 1.74846e-07 -1.74846e-07 1 -688 938)" fill="#242424"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 9.975 0C 6.65 0 3.705 1.8 2.185 4.54737L 0 2.36842L 0 8.52631L 6.175 8.52631L 3.515 5.87368C 4.75 3.50526 7.125 1.89474 9.975 1.89474C 13.87 1.89474 17.1 5.11579 17.1 9C 17.1 12.8842 13.87 16.1053 9.975 16.1053C 6.84 16.1053 4.275 14.1158 3.23 11.3684L 1.235 11.3684C 2.28 15.1579 5.795 18 9.975 18C 15.01 18 19 13.9263 19 9C 19 4.07368 14.915 0 9.975 0ZM 8.55 4.73684L 8.55 9.56842L 13.015 12.2211L 13.775 10.9895L 9.975 8.71579L 9.975 4.73684L 8.55 4.73684Z"/>
+</defs>
+</svg>

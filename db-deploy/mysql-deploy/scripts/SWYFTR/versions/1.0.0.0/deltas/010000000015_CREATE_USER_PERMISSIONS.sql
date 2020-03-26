@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS `USER_PERMISSIONS` (
+  `user_id` BIGINT NOT NULL,
+  `permission_id` INT NOT NULL,
+  `added_date` BIGINT NULL,
+  `revoked` TINYINT(1) NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`, `permission_id`),
+  INDEX `fk_USER_PERMISSIONS_2_idx` (`permission_id` ASC),
+  CONSTRAINT `fk_USER_PERMISSIONS_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `SWYFTR`.`SYS_USER_PROFILE` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_USER_PERMISSIONS_2`
+    FOREIGN KEY (`permission_id`)
+    REFERENCES `SWYFTR`.`PERMISSION_TYPES` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

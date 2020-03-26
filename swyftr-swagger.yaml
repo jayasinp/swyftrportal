@@ -1,0 +1,2814 @@
+swagger: '2.0'
+info:
+  version: '1'
+  title: Swyftr
+  description: Backend API for Swyftr system
+host: 52.221.58.5
+basePath: /api/v1
+schemes:
+  - https
+tags:
+  - name: Sprint1
+  - name: Sprint2
+  - name: Sprint3
+  - name: User
+    description: User Objects
+  - name: System
+    description: Internal System
+  - name: Customer
+    description: Customer facing | Mobile app
+  - name: Auth
+    description: Authentication
+  - name: Rider
+    description: Rider App
+  - name: Partner
+    description: Partner And Organization
+  - name: Order
+    description: Customer Order Manipulation
+  - name: Store
+    description: Store
+  - name: Product
+    description: Product
+  - name: Params
+    description: System Parameters api
+  - name: Rating
+    description: User Ratings
+  - name: Reporting
+    description: Reporting
+  - name: Payment
+    description: Payment Info
+  - name: Issue
+    description: Issue Tracking
+paths:
+  /auth/cus/register:
+    post:
+      summary: Register a customer to Swyftr
+      tags:
+        - Customer
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUserRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegisterUserResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/RegisterUserResponse'
+  /auth/sys/register:
+    post:
+      summary: Add a system to Swyftr
+      tags:
+        - System
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              addedByUserId:
+                type: string
+              addedToOrgId:
+                type: string
+              addedToBrach:
+                type: string
+              employeeId:
+                type: string
+              userPermissions:
+                $ref: '#/definitions/PermissionSet'
+              userDetails:
+                $ref: '#/definitions/RegisterUserRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegisterUserResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/RegisterUserResponse'
+  '/user/{userId}':
+    get:
+      summary: Get User Details
+      tags:
+        - User
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              userId:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              dateOfBirth:
+                type: string
+              email:
+                type: string
+              phoneNo:
+                type: number
+              mobileNo:
+                type: number
+              nic:
+                type: string
+              addressList:
+                type: array
+                items:
+                  $ref: '#/definitions/Address'
+              profilePicUrl:
+                type: string
+        '400':
+          description: Bad Request
+    patch:
+      summary: Update User
+      tags:
+        - User
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              dateOfBirth:
+                type: string
+              profilePicId:
+                type: number
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    delete:
+      summary: Terminate User
+      tags:
+        - System
+        - Sprint1
+      description: Suspend a User
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Fail
+  /user/address:
+    post:
+      summary: Add a new address to user
+      tags:
+        - User
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Address'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    delete:
+      summary: Remove address
+      tags:
+        - User
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: addressId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /user/update/address:
+    patch:
+      summary: Update user address
+      tags:
+        - User
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: addressId
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Address'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /user/cus/update_device_id:
+    post:
+      summary: Update device id of a user (push notifications)
+      tags:
+        - User
+        - Sprint3
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              deviceId:
+                type: string,
+              deviceOs:
+                type: string
+                enum: ['ios', 'android']
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /user/cus/sendOTP:
+    patch:
+      summary: Re-send OTP
+      tags:
+        - User
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /user/cus/validateOTP:
+    patch:
+      summary: Validate OTP
+      tags:
+        - User
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              otp:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /auth/cus/login:
+    post:
+      summary: Login a customer
+      tags:
+        - Customer
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CusLoginResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '406':
+          description: OTP Not Verified
+        '500':
+          description: Fail
+  /auth/sys/login:
+    post:
+      summary: Login a system user
+      tags:
+        - System
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SysLoginResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Fail
+  /auth/rider/login:
+    post:
+      summary: Login a rider
+      tags:
+        - Rider
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RiderLoginResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Fail
+  /auth/cus/send_reset_password:
+    post:
+      summary: Send reset password link to user's email address
+      tags:
+        - Sprint1
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Fail
+  /auth/cus/reset_password:
+    post:
+      summary: Update customer password using the token recieved to his email
+      tags:
+        - Customer
+        - Auth
+        - Sprint1
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+              newPassword:
+                type: string
+              retypePassword:
+                type: string
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Fail
+  /file/cus/upload:
+    post:
+      summary: Upload a image or any other file to system
+      tags:
+        - Customer
+        - Sprint3
+      consumes:
+        - 'multipart/form-data'
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: files
+          required: true
+          schema:
+            type: object
+            properties:
+              fileToUpload:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  mimetype:
+                    type: string
+                  data:
+                    type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              fileId:
+                type: string
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized
+        500:
+          description: Server Error
+  /file/cus/downloads:
+    post:
+      summary: Get images or any other files to system
+      tags:
+        - Customer
+        - Sprint3
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/File'
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized
+        500:
+          description: Server Error
+  /file/cus/download/{id}:
+    get:
+      summary: Download a file or image by file id
+      tags:
+        - Customer
+        - Sprint3
+      produces:
+        - 'image/png'
+        - 'image/jpeg'
+        - 'application/binary'
+        - 'application/octet-stream'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: number
+      responses:
+        200:
+          description: OK
+        400:
+          description: Fail
+  /order:
+    post:
+      summary: Order Creation
+      tags:
+        - Order
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              orderId:
+                type: string
+        '401':
+          description: Bad Request
+        '404':
+          description: Existing Order Not Found When Updating
+        '500':
+          description: Internal Server Error
+  /order/{orderId}:
+    get:
+      summary: Get Order Details By Order Id
+      tags:
+        - Order
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '401':
+          description: Bad Request
+        '404':
+          description: Existing Order Not Found When Updating
+        '500':
+          description: Internal Server Error
+    delete:
+      summary: Remove Order
+      tags:
+        - Order
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Fail
+  /order/customer/{customerId}:
+    get:
+      summary: Get Order Details By Customer Id
+      tags:
+        - Order
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '401':
+          description: Bad Request
+        '404':
+          description: Existing Order Not Found When Updating
+        '500':
+          description: Internal Server Error
+  /order/change_status_qr:
+    post:
+      summary: Change status of an order via QR by Customer
+      tags:
+        - Partner
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              qrString:
+                type: string
+              status:
+                type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /order/sys/all:
+    get:
+      summary: Get all orders, (can get by status)
+      tags:
+        - Order
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          required: false
+          name: status
+          type: string
+          enum:
+            - INIT
+            - ACCP
+            - DISPATCH
+            - DELI
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
+        404:
+          description: Bad Request
+  /order/{orderId}/rider:
+      get:
+        summary: Get rider information by order id
+        tags:
+          - Order
+          - Sprint3
+          - Customer
+        produces:
+          - application/json
+        parameters:
+          - in: path
+            required: true
+            name: orderId
+            type: number
+        responses:
+          500:
+            description: SERVER ERROR
+          404:
+            description: BAR REQUEST
+          200:
+            description: OK
+            schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                rider:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    mobile:
+                      type: string
+                    vehicleNo:
+                      type: string
+                    riderId:
+                      type: number
+  /order/sys/{orderId}:
+    get:
+      summary: Get Order Details By Order Id
+      tags:
+        - Order
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Order'
+        '401':
+          description: Bad Request
+        '404':
+          description: Existing Order Not Found When Updating
+        '500':
+          description: Internal Server Error
+  /order/sys/change_status/{orderId}:
+    post:
+      summary: Change status of an order
+      tags:
+        - Partner
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: orderId
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /order/sys/change_status_qr:
+    post:
+      summary: Change status of an order via QR by Rider
+      tags:
+        - Partner
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              qrString:
+                type: string
+              status:
+                type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /partner:
+    post:
+      summary: Create Organization
+      tags:
+        - Partner
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Organization'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orgId:
+                type: string
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    patch:
+      summary: Update existing Organization
+      tags:
+        - Partner
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: orgId
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Organization'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orgId:
+                type: string
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    delete:
+      summary: Diactivate an organization
+      tags:
+        - Partner
+        - Sprint2
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: orgId
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    get:
+      summary: Get organization by orgId
+      tags:
+        - Partner
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: orgId
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Organization'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /partner/search_by/{keyWord}:
+    get:
+      summary: Organization search
+      description: This endpoint should allow organizations to be search by name, id, type sent in keyWord parameter
+      tags:
+        - Partner
+        - Sprint2
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: keyWord
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Organization'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider:
+    patch:
+      summary: Update Rider Details By Rider
+      tags:
+        - Rider
+        - Sprint2
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              dateOfBirth:
+                type: string
+              phoneNumber:
+                type: string
+      responses:
+        200:
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider/update_password:
+    post:
+      summary: Update New Password For Rider App
+      tags:
+        - Rider
+        - Sprint2
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              newPassword:
+                type: string
+              retypePassword:
+                type: string
+              oldPassword:
+                type: string
+      responses:
+        200:
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider/order_history:
+    get:
+      summary: Get history of orders delivered by this rider
+      tags:
+        - Rider
+        - Sprint2
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/RiderOrder'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider/new_orders:
+    get:
+      summary: Get new orders assigned to this rider
+      tags:
+        - Rider
+        - Sprint2
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/RiderOrder'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider/on_goiong_orders:
+    get:
+      summary: Get on going orders for this rider
+      tags:
+        - Rider
+        - Sprint2
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/RiderOrder'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /rider/change_status:
+    patch:
+      summary: Update rider available/Offline status
+      tags:
+        - Rider
+        - Sprint3
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum: ['OFFLINE', 'AVAILABLE']
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Fail
+  /rider/accept_order:
+    patch:
+      summary: Sent consent for order seen
+      tags:
+        - Rider
+        - Sprint3
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              orderId:
+                type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        500:
+          description: Fail
+  /auth/sys/permission:
+    post:
+      summary: Grant Permissions For A User
+      tags:
+        - Sprint2
+        - Auth
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              userId:
+                type: integer
+              permissions:
+                type: array
+                items:
+                  $ref: '#/definitions/Permission'
+      responses:
+        200:
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /store:
+    post:
+      summary: Create Store
+      tags:
+        - Sprint2
+        - Store
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Store'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              storeId:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    patch:
+      summary: Update Store
+      tags:
+        - Sprint2
+        - Store
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Store'
+      responses:
+        200:
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+    get:
+      summary: Get store by store id
+      tags:
+        - Sprint2
+        - Store
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: storeId
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Store'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /store/cus/:
+    get:
+      summary: Get store by store id
+      tags:
+        - Sprint2
+        - Store
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: storeId
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Store'
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /store/cus/allStores/{npp}/{page}:
+    get:
+      summary: Get all stores with organizations
+      tags:
+        - Sprint2
+        - Store
+        - Partner
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: npp
+          type: integer
+          required: true
+        - in: path
+          name: page
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/PartnerStore'
+              pagination:
+                $ref: '#/definitions/Pagination'
+  /store/all/{partnerId}:
+    get:
+      summary: Get all stores belong to a partner
+      tags:
+        - Sprint2
+        - Store
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: partnerId
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              stores:
+                type: array
+                items:
+                  $ref: '#/definitions/Store'
+  /store/allProducts/{storeId}:
+    get:
+      summary: Get all products belongs to a store
+      tags:
+        - Sprint2
+        - Store
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: storeId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+              store:
+                $ref: '#/definitions/Store'
+  /store/cus/all/{partnerId}:
+    get:
+      summary: Get all stores/branches for an organization
+      tags:
+        - Store
+        - Customer
+        - Sprint2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: partnerId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              stores:
+                type: array
+                items:
+                  $ref: '#/definitions/Store'
+        400:
+          description: Bad Request
+        500:
+          description: Server Error
+        401:
+          description: Unauthorized
+  /store/cus/allProducts/{storeId}:
+    get:
+      summary: Get all products that are allowed to sale in a store
+      tags:
+        - Sprint2
+        - Customer
+        - Store
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: storeId
+          required: true
+          type: number
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+              store:
+                $ref: '#/definitions/Store'
+        400:
+          description: Bad Request
+        500:
+          description: Server Error
+        401:
+          description: Unauthorized
+  /category/cus/allSubCategories/{categoryId}:
+    get:
+      summary: Get all categories belongs to a parent category
+      tags:
+        - Sprint2
+        - Category
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: categoryId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              subSubCategories:
+                type: array
+                items:
+                  $ref: '#/definitions/Category'
+  /category/allSubCategories/{categoryId}:
+    get:
+      summary: Get all categories belongs to a parent category
+      tags:
+        - Sprint2
+        - Category
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: categoryId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              subSubCategories:
+                type: array
+                items:
+                  $ref: '#/definitions/Category'
+  /category/cus/allStores/{categoryId}:
+    get:
+      summary: Get all stores belongs to a category
+      tags:
+        - Sprint2
+        - Category
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: categoryId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              stores:
+                type: array
+                items:
+                  $ref: '#/definitions/StoreWithOrg'
+              partners:
+                type: array
+                items:
+                  $ref: '#/definitions/Organization'
+  /category/allStores/{categoryId}:
+    get:
+      summary: Get all stores belongs to a category
+      tags:
+        - Sprint2
+        - Category
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: categoryId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              stores:
+                type: array
+                items:
+                  $ref: '#/definitions/StoreWithOrg'
+              partners:
+                type: array
+                items:
+                  $ref: '#/definitions/Organization'
+  /product:
+    post:
+      summary: Create and Update a Product
+      tags:
+        - Sprint2
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              productId:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /product/{organizationId}/{branchId}:
+    get:
+      summary: Get all products belongs to a organization and to a store
+      tags:
+        - Sprint2
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: organizationId
+          type: number
+          required: true
+        - in: path
+          name: branchId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+  /product/cus/byName/{searchName}:
+    get:
+      summary: Search Products By Name
+      tags:
+        - Sprint2
+        - Product
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: searchName
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/ProductBranchOrg'
+  /product/sys/byName/{searchName}:
+    get:
+      summary: Search Products By Name
+      tags:
+        - Sprint2
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: searchName
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/ProductBranchOrg'
+  /product/{productId}:
+    delete:
+      summary: Delete a product
+      tags:
+        - Sprint2
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: productId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+  /product/cus/byProductIds:
+    post:
+      summary: Get Product By Product Id array
+      tags:
+        - Sprint2
+        - Product
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+  /product/byProductIds:
+    post:
+      summary: Get Product By Product Id array
+      tags:
+        - Sprint2
+        - Product
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+  /params/byKey/{key}:
+    get:
+      summary: Get Param Values
+      tags:
+        - Sprint2
+        - Params
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: key
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              value:
+                type: string
+  /rating:
+    post:
+      summary: Add ratings
+      tags:
+        - Sprint2
+        - Rating
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Rating'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+  /rating/byOrder/{orderId}:
+    get:
+      summary: Get all ratings related to an order
+      tags:
+        - Sprint2
+        - Rating
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: orderId
+          type: number
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              products:
+                type: array
+                items:
+                  $ref: '#/definitions/Rating'
+  /rating/cus:
+    post:
+      summary: Add ratings
+      tags:
+        - Sprint2
+        - Rating
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Rating'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+  /report/settlements/{status}/{fromDate}/{toDate}/{orgId}:
+    get:
+      summary: Settlements By Organization
+      tags:
+        - Sprint2
+        - Reporting
+        - Partner
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: orgId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlements_Response'
+  /report/settlements/store/{status}/{fromDate}/{toDate}/{branchId}:
+    get:
+      summary: Settlements By Store
+      tags:
+        - Sprint2
+        - Reporting
+        - Store
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: branchId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Settlements_Response'
+  /report/items/{status}/{fromDate}/{toDate}/{orgId}:
+    get:
+      summary: Number Of Items sold per Partner
+      tags:
+        - Sprint2
+        - Reporting
+        - Partner
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: orgId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Items_Sold_Response'
+  /report/items/store/{status}/{fromDate}/{toDate}/{branchId}:
+    get:
+      summary: Number Of Items sold per Store
+      tags:
+        - Sprint2
+        - Reporting
+        - Store
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: branchId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Items_Sold_Response'
+  /report/orders/{status}/{fromDate}/{toDate}/{orgId}:
+    get:
+      summary: Orders By Status By Partner
+      tags:
+        - Sprint2
+        - Reporting
+        - Partner
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: orgId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Order_Status_Response'
+  /report/orders/store/{status}/{fromDate}/{toDate}/{branchId}:
+    get:
+      summary: Orders By Status By Store
+      tags:
+        - Sprint2
+        - Reporting
+        - Store
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: status
+          type: string
+          required: true
+        - in: path
+          name: fromDate
+          type: string
+          required: true
+        - in: path
+          name: toDate
+          type: string
+          required: true
+        - in: path
+          name: branchId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              orders:
+                type: array
+                items:
+                  $ref: '#/definitions/Order_Status_Store'
+  /paymentInfo/cus:
+    post:
+      summary: Add Payment Info
+      tags:
+        - Sprint2
+        - Payment
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentInfo'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              paymentInfoId:
+                type: integer
+  /paymentInfo/sys:
+    post:
+      summary: Add Payment Info
+      tags:
+        - Sprint2
+        - Payment
+        - Customer
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentInfo'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              paymentInfoId:
+                type: integer
+  /issues:
+    post:
+      summary: Add Issue
+      tags:
+        - Issue
+        - Customer
+        - System
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              subject:
+                type: string
+              description:
+                type: string
+              categoryId:
+                type: integer
+              orderId:
+                type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              issueId:
+                type: integer
+  /issues/getAllIssueCategories:
+    get:
+      summary: Get Issue Categories
+      tags:
+        - Issue
+        - Customer
+        - System
+      produces:
+        - application/json      
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              categories:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    description:
+                      type: string  
+  /orderCollect/insert:
+    post:
+      summary: Add Order Friend receive collector
+      tags:
+        - Order
+        - Rider
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderCollectionInfo'
+      responses:
+        200:
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Fail
+  /orderFriend/byOrderId/{orderId}:
+    get:
+      summary: Get Order By Friend - System
+      tags:
+        - Order
+        - System
+      produces:
+        - application/json 
+      parameters:
+        - in: path
+          name: orderId
+          type: string
+          required: true    
+      responses:
+        200:
+          description: OK
+          schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                orderFriend:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    phone:
+                      type: string
+  /orderFriend/cus/byOrderId/{orderId}:
+    get:
+      summary: Get Order By Friend - Customer
+      tags:
+        - Order
+        - Customer
+      produces:
+        - application/json 
+      parameters:
+        - in: path
+          name: orderId
+          type: string
+          required: true    
+      responses:
+        200:
+          description: OK
+          schema:
+              type: object
+              properties:
+                status:
+                  type: integer
+                orderFriend:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    address:
+                      type: string
+                    phone:
+                      type: string
+definitions:
+  LoginRequest:
+    type: object
+    properties:
+      userName:
+        type: string
+      password:
+        type: string
+  CusLoginResponse:
+    type: object
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+      expiresOn:
+        type: integer
+      userId:
+        type: string
+  RiderLoginResponse:
+    type: object
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+      expiresOn:
+        type: integer
+      userId:
+        type: string
+  SysLoginResponse:
+    type: object
+    properties:
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+      expiresOn:
+        type: integer
+      userId:
+        type: string
+      permissions:
+        $ref: '#/definitions/PermissionSet'
+  RegisterUserRequest:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      dateOfBirth:
+        type: string
+      email:
+        type: string
+      phoneNo:
+        type: string
+      mobileNo:
+        type: string
+      nic:
+        type: string
+      password:
+        type: string
+      retypePassword:
+        type: string
+      profilePicId:
+        type: number
+  RegisterUserResponse:
+    type: object
+    properties:
+      status:
+        type: number
+      message:
+        type: number
+  PermissionSet:
+    type: array
+    items:
+      type: string
+  Address:
+    type: object
+    properties:
+      id:
+        type: string
+      userId:
+        type: string
+      addressLine1:
+        type: string
+      addressLine2:
+        type: string
+      district:
+        type: string
+      province:
+        type: string
+  Organization:
+    type: object
+    properties:
+      orgId:
+        type: string
+      name:
+        type: string
+      headOfficeAddress:
+        type: string
+      headOfficeContactNo:
+        type: string
+      orgType:
+        type: string
+        enum: ['swyftr', 'partner_store', 'partner_rider']
+      bank:
+        type: string
+      branch:
+        type: string
+      accountNo:
+        type: string
+      preferedPaymentMethod:
+        type: string
+        enum: ['cash', 'cheque']
+      branchCode:
+        type: string
+      bankSwiftCode:
+        type: string
+      pointOfContactName:
+        type: string
+      pointOfContactMobile:
+        type: string
+      tags:
+        type: string
+      orgLogoImage:
+        type: string
+  Order:
+    type: object
+    properties:
+      orgId:
+        type: number
+      branchId:
+        type: number
+      customer:
+        type: number
+      orderAddress:
+        type: string
+      deliveryRequired:
+        type: number
+      orderId:
+        type: number
+      status:
+        type: string
+        enum: [INIT, ACCP, DISPATCH, DELI]
+      latitude:
+        type: number
+      longitude:
+        type: number
+      deliveryCost:
+        type: number
+      deliveryDate:
+        type: number
+      deliveryETA:
+        type: string
+      qr:
+        type: string
+      deliveryContactNumber:
+        type: string
+      writtenAddress:
+        type: string
+      paymentStatus:
+        type: string
+        enum: [CARD, IPG]
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItem'
+      friendReceive:
+        $ref: '#/definitions/FriendReceive'
+  RiderOrder:
+    type: object
+    properties:
+      orgId:
+        type: number
+      branchId:
+        type: number
+      orderAddress:
+        type: string
+      orderId:
+        type: number
+      status:
+        type: string
+        enum: [INIT, ACCP, DISPATCH, DELI]
+      latitude:
+        type: number
+      longitude:
+        type: number
+      deliveryCost:
+        type: number
+      qr:
+        type: string
+      cusName:
+        type: string
+      cusMobile:
+        type: string
+      cusNic:
+        type: string
+  OrderItem:
+    type: object
+    properties:
+      branchStockId:
+        type: number
+      quantity:
+        type: integer
+  Permission:
+    type: object
+    properties:
+      permissionId:
+        type: integer
+      allowed:
+        type: number
+  Store:
+    type: object
+    properties:
+      id:
+        type: integer
+      orgId:
+        type: integer
+      branchName:
+        type: string
+      address:
+        type: string
+      longitude:
+        type: number
+      latitude:
+        type: number
+      district:
+        type: string
+      province:
+        type: string
+      managerId:
+        type: integer
+      phone:
+        type: string
+      logo:
+        type: number
+      displayImage:
+        type: number
+      slogan:
+        type: string
+      branchLogoImage:
+        type: string
+      branchDisplayImage:
+        type: string
+  StoreWithOrg:
+    type: object
+    properties:
+      id:
+        type: integer
+      orgId:
+        type: integer
+      orgLogoId:
+        type: integer
+      branchName:
+        type: string
+      address:
+        type: string
+      longitude:
+        type: number
+      latitude:
+        type: number
+      district:
+        type: string
+      province:
+        type: string
+      managerId:
+        type: integer
+      phone:
+        type: string
+      logo:
+        type: number
+      displayImage:
+        type: number
+      slogan:
+        type: string
+      branchLogoImage:
+        type: string
+  Product:
+    type: object
+    properties:
+      id:
+        type: integer
+      productName:
+        type: string
+      productCode:
+        type: string
+      qty:
+        type: number
+      unitPrice:
+        type: number
+      branchId:
+        type: number
+      categoryId:
+        type: number
+      description:
+        type: string
+      discount:
+        type: number
+      availability:
+        type: string
+        enum: ['IN', 'OUT']
+      specialNote:
+        type: string
+      assetIds:
+        type: array
+        items:
+          type: integer      
+      tags:
+        type: string
+  ProductBranchOrg:
+    type: object
+    properties:
+      id:
+        type: integer
+      productName:
+        type: string
+      productCode:
+        type: string
+      qty:
+        type: number
+      unitPrice:
+        type: number
+      branchId:
+        type: number
+      categoryId:
+        type: number
+      description:
+        type: string
+      discount:
+        type: number
+      availability:
+        type: string
+        enum: ['IN', 'OUT']
+      specialNote:
+        type: string
+      assetIds:
+        type: array
+        items:
+          type: integer      
+      tags:
+        type: string
+      organizationId:
+        type: integer
+      organizationName:
+        type: string
+      branchName:
+        type: string
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+      categoryName:
+        type: string
+      parentCategory:
+        type: string
+      assetId:
+        type: number
+  FriendReceive:
+    type: object
+    properties:
+      name:
+        type: string
+      address:
+        type: string
+      phone:
+        type: number
+  Rating:
+    type: object
+    properties:
+      orderId:
+        type: integer
+      userId:
+        type: integer
+      userType:
+        type: string
+      customerRating:
+        type: integer
+      riderRating:
+        type: integer
+      storeRating:
+        type: integer
+      swyftrRatomg:
+        type: integer
+  Settlements_Response:
+    type: object
+    properties:
+      orgId:
+        type: integer
+      orgName:
+        type: string
+      total:
+        type: number
+      paymentPercentage:
+        type: number
+      branchId:
+        type: integer
+      branchName:
+        type: string
+  Items_Sold_Response:
+    type: object
+    properties:
+      orgId:
+        type: integer
+      name:
+        type: string
+      branchStockId:
+        type: integer
+      total:
+        type: number
+      branchId:
+        type: integer
+      branchName:
+        type: string
+  Order_Status_Response:
+    type: object
+    properties:
+      orgId:
+        type: integer
+      name:
+        type: string
+      total:
+        type: number
+      branchId:
+        type: integer
+      branchName:
+        type: string
+  Order_Status_Store:
+    type: object
+    properties:
+      name:
+        type: string
+      total:
+        type: number
+      branchId:
+        type: integer
+      branchName:
+        type: string
+  PartnerStore:
+    type: object
+    properties:
+      orgId:
+        type: integer
+      name:
+        type: string
+      headOfficeAddress:
+        type: string
+      contactNo:
+        type: string
+      orgType:
+        type: string
+      orgLogo:
+        type: string
+      branchCode:
+        type: string
+      branchId:
+        type: integer
+      branchName:
+        type: string
+      branchAddress:
+        type: string
+      branchLogo:
+        type: string
+      branchDisplayImage:
+        type: string
+      longtude:
+        type: string
+      latitude:
+        type: string
+      district:
+        type: string
+      province:
+        type: string
+      branchPhone:
+        type: string
+  Pagination:
+    type: object
+    properties:
+      current:
+        type: integer
+      perPage:
+        type: integer
+      previous:
+        type: integer
+      next:
+        type: integer
+  File:
+    type: object
+    properties:
+      fileName:
+        type: string
+      fileType:
+        type: string
+      data:
+        type: string
+  PaymentInfo:
+    type: object
+    properties:
+      orderId:
+        type: integer
+      transactionId:
+        type: integer
+      totalAmount:
+        type: number
+      email:
+        type: string
+      contactNumber:
+        type: string
+      deliveryAddress:
+        type: string
+      status:
+        type: string
+  OrderCollectionInfo:
+    type: object
+    properties:
+      riderId:
+        type: integer
+      orderId:
+        type: integer
+      signature:
+        type: integer
+      collectorName:
+        type: string
+      collectorContact:
+        type: string
+      collectorNIC:
+        type: string

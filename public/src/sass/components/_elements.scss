@@ -1,0 +1,15 @@
+.panel-default {
+	margin: 10px auto;
+	-webkit-box-shadow: 1px 1px 15px 0 rgba(000,000,000,0.4);
+box-shadow: 1px 1px 15px 0 rgba(000,000,000,0.4);
+}
+
+.spacing-3{
+    margin: 8px 0;
+    position: relative;
+    top: 2px;
+}
+
+.jconfirm.jconfirm-supervan .jconfirm-box .jconfirm-buttons button{
+	border-radius: 50px;
+}

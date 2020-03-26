@@ -1,0 +1,22 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>Rider management</h1>
+    </div>
+
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">Riders</h2>
+      <a class="btn btn-primary pull-right spacing-3" (click)="openCreateRiderModel()" >Create Rider</a>
+    </nav>
+  </div>
+</div>
+<div class="content-cover ">
+  <div class="wide-container ">
+    <div class="page-title">
+      <div class="clearfix"> </div>
+    </div>
+    <div class="tabs-cover">
+      <app-rider-table [riders]="ridersArr"> </app-rider-table>
+    </div>
+  </div>
+</div>

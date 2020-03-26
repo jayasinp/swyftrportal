@@ -1,0 +1,39 @@
+.filter-section {
+    padding: 30px;
+    background: #fff;
+    margin-bottom: 30px;
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.filter-section .columns {
+    padding: 0 5px;
+}
+.filter-section .btn-panel {
+    padding-top: 22px;
+}
+.filter-section .btn-panel .btn {
+    font-size: 13px;
+    padding: 8px 0;
+}
+.filter-section .form-group {
+    font-size: 12px;
+}
+@media (min-width: 992px) {
+    .filter-section .form-group {
+        margin-bottom: 0;
+    }
+}
+.filter-section .form-control {
+    border-radius: 2px;
+    padding: 0px 10px;
+}
+.filter-section .date-selector {
+    padding: 6px 10px;
+}
+.filter-section .date-selector .fa-caret-down {
+    float: right;
+    padding: 4px;
+}
+
+p {
+    font-family: Lato;
+  }

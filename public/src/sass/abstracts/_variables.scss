@@ -1,0 +1,84 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+$light-color: #fff;
+
+/// Regular font family
+/// @type List
+$reguler-font: 'Open Sans', sans-serif!default;   
+
+/// bold font family
+/// @type List  
+$heading-font: 'Open Sans', sans-serif;;
+
+
+/// Copy text color
+/// @type Color
+$text-color: #4a4a4a !default;  
+$light-text-color: #9a9a9a !default;  
+
+/// Main brand color
+/// @type Color
+$brand-color: #F23044 !default;
+
+
+/// Sec brand color 
+/// @type Color
+$sec-brand-color: #eee !default;
+
+
+$input-border: #e2e2e2 !default;
+
+
+/// light grey
+/// @type Color
+$light-grey: #e2e2e2 !default;
+
+
+/// Medium grey
+/// @type Color
+$mid-grey: #7A7A7A !default;
+
+/// Dark grey
+/// @type Color
+$dark-grey: #5C5C5C !default;
+
+
+/// light blue
+/// @type Color
+$light-blue: #CBE3F2 !default;
+
+
+
+/// border grey
+/// @type Color
+$border-grey: #d8d8d8 !default;
+
+
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px,
+) !default;
+
+
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

@@ -1,0 +1,41 @@
+<table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+  <thead  class="plain">
+  <tr>
+    <th></th>
+    <th>Rider Name</th>
+    <th>NIC</th>
+    <th>License</th>
+    <th>Mobile Number</th>
+    <th>Address</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let rider of riders">
+    <th class="org-logo">
+      <!--<div *ngIf="!partnerLogos[partner.orgId]" class="image"> </div>-->
+      <!--<img class="image" *ngIf="partnerLogos[partner.orgId]" src="data:{{partnerLogos[partner.orgId].fileType}};base64,{{partnerLogos[partner.orgId].data}}" />-->
+    </th>
+    <td>{{rider.firstName}} {{rider.lastName}}</td>
+    <td>{{rider.nic}}</td>
+    <td>{{rider.license}}</td>
+    <td>{{rider.mobileNumber}}</td>
+    <td>{{rider.address}}</td>
+    <td>{{getRiderStatus(rider.status)}}</td>
+    <td>
+      <div class="btn-group action-panel">
+        <button *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" type="button" class="btn btn-success delete-user" (click)="viewRiderProfile(rider)">
+          <i class="fa fa-building" aria-hidden="true"></i> View
+        </button>
+        <button *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-Partner" (click)="openEditRiderProfile(rider)">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+        </button>
+        <button *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" type="button" class="btn btn-danger" data-target="#deactivate-Partner" (click)="deactivateRider(rider)">
+          <i class="fa fa-ban" aria-hidden="true"></i>Deactivate
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

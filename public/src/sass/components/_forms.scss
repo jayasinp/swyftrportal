@@ -1,0 +1,190 @@
+.form-control{ 
+	width: 100%; 
+	margin:0;  
+	border: 1px solid $border-grey;
+	padding: 0;  
+	padding: 5px 25px;
+	outline: none; 
+	border-radius: 50px;
+	&:focus{
+		box-shadow: none;
+		border: 1px solid $border-grey;
+	}
+
+
+}
+
+.form { 
+	padding: 40px;   
+	.no-placeholder {
+		label{
+			position: static; 
+		} 
+		
+	}
+	.form-control{
+		    height: 48px;
+	}
+
+	h4{
+		margin: 10px 0;
+	}
+	.form-group {
+		position: relative;
+		padding-bottom: 18px; 
+		margin-bottom: 0;
+
+		label{
+			text-align: center; 
+			display: block;
+			font-weight: 400; 
+			font-size: 14px; 
+			text-transform: uppercase;  
+			position:absolute;
+			pointer-events:none;
+			left: 25px;
+			top: 15px;
+			transition:0.2s ease all; 
+		}		
+		input:focus ~ label, input:valid ~ label    {
+			top:-12px;
+			left: 20px;   
+			font-size:12px; 
+				 
+			background: #fff;
+			padding: 5px; 
+			font-weight: 600;
+
+		}
+		.validation-messege{
+			text-align: left;
+			padding: 4px 18px;
+			padding-left: 30px;
+			position: absolute;
+			bottom: 11px;
+			left: 0px;
+			color: red;
+			font-weight: 600;
+			background: #fff;
+			border-radius: 27px;
+
+			&:after{
+				bottom: 100%;
+				left: 20px;
+				border: solid transparent;
+				content: " ";
+				height: 0;
+				width: 0;
+				position: absolute;
+				pointer-events: none;
+				border-color: rgba(136, 183, 213, 0);
+				border-bottom-color: #fff;
+				border-width: 5px;		
+			}
+
+			.form-control-feedback{
+				left: 0;
+				right: auto;
+				    line-height: 27px;
+			}
+
+		}
+		&.has-error{
+			padding-bottom: 50px;
+			.form-control{
+				box-shadow: none;
+			}
+			label{
+				color: red;
+			}
+
+		}
+	}	
+} 
+.form-buttons {
+	margin-top: 20px;    
+}
+
+.search-box{
+	padding: 10px 0;
+	position: relative;
+	max-width: 200px;
+	margin: 0 auto;
+	float: right;
+	@include respond-to(medium) { 
+		margin: 0;
+		max-width: 300px;
+		float: none;		
+	}  			
+	.search-textbox{
+		height: 42px;
+		border-radius: 25px;
+		padding: 10px 20px;
+		padding-left: 50px;
+		border: 1px solid $border-grey;
+		display: block;
+		width: 100%;
+	}
+	.flaticon-search{
+		position: absolute;
+		top: 15px;
+		left: -5px;
+		&:before{
+			font-size: 23px;
+
+		}
+	}
+}
+
+.checkbox  {
+	text-align: left;
+	input{
+		margin-right: 5px; 
+	}
+	label{
+		display: inline-block;
+		padding-right: 10px;
+	}
+}
+.add-form{
+	padding: 5px 30px 30px 30px;
+}
+.uploader {
+	width: 100%;
+    padding: 0;
+    background: #eee;
+    margin-bottom: 20px;
+    border-radius: 4px;  
+    text-align: center;
+    border: 1px dashed #222;
+
+    .dropzone{
+    	background: none;
+    	border: 0;
+    	padding: 0;
+    	min-height: 0;
+    }
+}
+
+
+.modal-header {
+	h4{
+		text-align: center;
+		font-size: 24px;
+	}
+	
+}
+
+.link-panel {
+	padding: 20px 0 0 0;
+	a{
+		color: $light-blue;
+		font-weight: 600;
+
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+	
+}
+

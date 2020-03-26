@@ -1,0 +1,29 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>User management</h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">Users</h2>
+      <a class="btn btn-primary pull-right spacing-3" (click)="openCreateUserModel()" >Create User</a>
+      <ul class="nav navbar-nav">
+        <li [ngClass]="{active: activeTab === 'activate_users'}"><a (click)="reloadAndSelectTables(0)"> Active </a></li>
+        <li [ngClass]="{active: activeTab === 'deactivate_users'}"><a (click)="reloadAndSelectTables(1)">Inactive</a></li>
+      </ul>
+
+    </nav>
+
+  </div>
+</div>
+<div class="content-cover ">
+  <div class="tab-content">
+    <tabset #userTabs >
+      <tab heading="Active Users">
+        <app-active-users [activeUsers]="activeUserArray" [storesOfMyOrg]="storesOfMyOrg" (reloadTable)="reloadAndSelectTables($event)"></app-active-users>
+      </tab>
+      <tab heading="Deactivated Users">
+        <app-inactive-users [inactiveUsers]="inActiveUserArray" (reloadTable)="reloadAndSelectTables($event)"></app-inactive-users>
+      </tab>
+    </tabset>
+  </div>
+</div>

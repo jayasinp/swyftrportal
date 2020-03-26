@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS `USER_TOKEN` (
+  `user_id` BIGINT NOT NULL,
+  `access_token` TEXT NULL,
+  `valid_till` BIGINT NULL,
+  `active` TINYINT(1) NULL,
+  `refresh_token` VARCHAR(300) NULL,
+  `id` BIGINT(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  INDEX `FK_USER_ID` (`user_id` ASC),
+  CONSTRAINT `fk_USER_TOKEN_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `SWYFTR`.`AUTH` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

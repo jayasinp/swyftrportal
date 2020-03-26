@@ -1,0 +1,1 @@
+export const GET_PARAM_VALUE_BY_KEY = "SELECT * FROM PARAMS WHERE param_key = ?";

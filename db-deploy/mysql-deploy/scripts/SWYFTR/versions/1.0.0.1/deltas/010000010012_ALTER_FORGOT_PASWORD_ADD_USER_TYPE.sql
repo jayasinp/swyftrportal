@@ -1,0 +1,2 @@
+ALTER TABLE `FORGOT_PASSWORD`
+ADD COLUMN `user_type` ENUM('sys', 'cus') NOT NULL;

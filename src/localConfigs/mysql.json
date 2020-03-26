@@ -1,0 +1,13 @@
+{
+  "connectionLimit": 50,
+  "acquireTimeout": 60000,
+  "host": "localhost",
+  "port": "3306",
+  "user": "root",
+  "password": "gvt123",
+  "database": "SWYFTR",
+  "charset": "UTF8_GENERAL_CI",
+  "debug": false,
+  "waitForConnections" : true,
+  "queueLimit" : 15000
+}

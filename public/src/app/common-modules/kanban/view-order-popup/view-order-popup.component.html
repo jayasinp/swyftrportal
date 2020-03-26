@@ -1,0 +1,104 @@
+<div class="modal-header">
+  <h4 class="modal-title">Order ID : {{order.orgName}} | {{order.branchName}} | {{order.orderId}}</h4>
+  <button type="button" class="close" (click)="dismiss()" >&times;</button>
+</div>
+
+<div class="modal-body">
+  <div class="content-cover ">
+    <div class="wide-container ">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="page-title">
+
+          </div>
+          <div class="order-data">
+            <div class="item-data " *ngFor="let item of orderInfo.items">
+
+              <!-- <img class="item-image" *ngIf="itemImages[item.prodId]" src="data:{{itemImages[item.prodId].fileType}};base64,{{itemImages[item.prodId].data}}" /> -->
+              <img class="item-image" *ngIf="itemImages[item.prodId]" src="uploads/{{itemImages[item.prodId]}}"  />
+              <img class="item-image" *ngIf="!itemImages[item.prodId]" src="img/default_product.png" />
+
+              <h3>{{item.productName}}</h3>
+              <div class="qty">QTY : {{item.quantity}}</div>
+              <div class="comments">
+                <span class="glyphicon glyphicon-comment"></span>{{item.description}}
+              </div>
+              <div class="qty-order error" *ngIf="item.availability === 'OUT'">
+                Not Available
+              </div>
+              <div class="qty-order" *ngIf="item.availability === 'IN'">
+                Available
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="page-title">
+
+            <div class="clearfix"> </div>
+          </div>
+          <div class="panel">
+            <div class="data-set">
+              <h6>Name</h6>
+              <p>{{orderInfo.customer.firstName}} {{orderInfo.customer.lastName}}</p>
+            </div>
+            <div class="data-set">
+              <h6>Email</h6>
+              <p>{{orderInfo.customer.email}}</p>
+            </div>
+            <div class="data-set">
+              <h6>Phone</h6>
+              <p>{{orderInfo.customer.mobileNo}}</p>
+            </div>
+            <div class="data-set">
+              <h6>Delivery Address</h6>
+              <p>{{orderInfo.customer.address}}</p>
+            </div>
+            <div class="data-set" *ngIf="orderInfo.rider">
+              <h6>Rider Name</h6>
+              <p>{{orderInfo.rider.firstName}} {{orderInfo.rider.lastName}}</p>
+            </div>
+            <div class="data-set" *ngIf="orderInfo.rider">
+              <h6>Rider Mobile No.</h6>
+              <p>{{orderInfo.rider.mobile}}</p>
+            </div>
+
+            <div class="qr-box">
+              <div class="qr-heading">
+                QR
+              </div>
+              <div class="qr-code">
+                <!-- <img *ngIf="qrImage" src="data:{{qrImage.fileType}};base64,{{qrImage.data}}" /> -->
+                <img class="image" *ngIf="qrImage" src="uploads/{{qrImage}}"  />
+              </div>
+              <a class="btn btn-default btn-block" (click)="printOrderInfo()" >Print</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-links">
+    <a *ngIf="showCancel" class="deciline" (click)="onDeclined()" >Deciline</a>
+    <a *ngIf="confirmButton && isConfirmationButtonEnabled()" class="btn btn-primary" (click)="onConfirmed()"> {{confirmButton}} </a>
+  </div>
+</div>
+
+<app-dialog [(visible)]="showCancelDialog['show']" [width]="50" [height]="30" [headerColor]="showCancelDialog['headerColor']" [resizable]="false">
+  <dialog-header><h5 style="color: white">{{showCancelDialog.header}}</h5></dialog-header>
+  <dialog-body>
+    <div class="card">
+      <div class="card-body" style="padding: 1em">
+        <h4 class="card-text">{{showCancelDialog.description}} </h4>
+
+        <a class="btn btn-danger" (click)="showCancelDialog.onConfirm()">{{showCancelDialog.confirmButton}}</a>
+        <a class="btn btn-default" (click)="showCancelDialog.onCancel()">{{showCancelDialog.cancelButton}}</a>
+      </div>
+    </div>
+  </dialog-body>
+</app-dialog>
+
+<div class="modal-footer">
+</div>

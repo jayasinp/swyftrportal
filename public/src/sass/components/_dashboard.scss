@@ -1,0 +1,170 @@
+.data-widget{
+	border-right: 1px solid $light-grey;
+	&.item-list{
+		.heading{
+			img{
+				width: 15px;
+				position: relative;
+				top: -3px;	
+			}	
+		}
+	}		
+	&.pickup-items{
+		.heading{
+			img{
+				width: 27px;
+				position: relative;
+				top: -3px;	
+			}	
+		}
+	}
+	&.error{
+		.value{
+			color: red;
+		}
+	}	
+	.heading{
+		font-weight: 600;
+		padding: 5px 0;
+		img{
+			margin-right: 5px;    
+			width: 18px;
+		}
+	}  
+	.value{
+		font-size: 55px;
+		line-height: 55px;
+		font-weight: 200;  
+	}
+}
+
+.dashboard-data{
+	padding: 25px 20px 30px 20px;
+	background: #fff; 
+	    box-shadow: 1px 0 20px 0 rgba(0, 0, 0, 0.2);
+	    border-top: 1px solid $light-grey;
+}
+
+.kanban{
+	padding: 25px 0;
+	overflow: auto;
+
+	.scroller{
+		min-width: 1100px;
+	}
+	.column{
+		width: 20%;
+		float: left;
+		padding: 0 10px;
+
+		.heading{
+			font-size: 20px;
+			font-weight: 600;
+
+			span{
+				display: block;
+				font-size: 12px;
+				font-weight: 400;
+			}
+		}
+	}
+	.task{
+    padding: 10px 14px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+		.order-id{
+			font-size: 15px;
+			padding: 0 0 0 0;
+			span{
+				margin-right: 5px;
+			}
+		}
+		.order-distance{
+			font-size: 12px;
+			padding-bottom: 5px;
+			text-transform: capitalize;
+			span{
+				margin-right: 5px;
+				display: inline-block;
+			}
+		}
+		.order-detail{
+			font-size: 12px;
+		}
+		.overlays{
+			position: absolute;
+			width: 100%;
+			
+			bottom: 0;
+			right: -100%;
+			text-align: right;
+			padding: 10px 20px;
+		
+			.btn{
+				display: block;
+				font-size: 11px;
+				padding: 7px 10px; 
+				width: 48%;
+				margin: 0 1%;
+    			float: left;
+			}
+		}
+		&:hover{
+			.overlays{
+				right: 0;
+			}
+			.order-id, .order-distance, .order-detail , .priority-bar{
+				opacity: 0.2;
+			}
+		}
+
+	}
+}
+
+.priority-bar{
+    float: right;
+    font-weight: 600;
+    font-size: 12px;
+    margin-top: 4px;
+	color: #ca6003;
+}
+
+
+.priority{
+	background: #F23044;
+	display: inline-block;
+	padding: 3px 15px;
+	border-radius: 15px;
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;	
+    top: -1px;
+    position: relative;	
+	&.normal{
+		background: #27AE60;
+	}
+}
+
+.sheduled{
+	border-left: 4px solid  #dc8e14;
+	.priority {
+		background: #dc8e14;
+	}
+}
+
+.normal{
+	border-left: 4px solid  #2c9e23;
+	.priority {
+		background: #2c9e23;
+	}
+}
+.critical{
+	border-left: 4px solid  #f33737;
+	.priority {
+		background: #f33737;
+	}
+}

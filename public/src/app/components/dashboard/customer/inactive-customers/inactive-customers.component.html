@@ -1,0 +1,35 @@
+<div class="page-title">
+  <h3 class="pull-left">Deactivated Customers</h3>
+  <div class="clearfix"> </div>
+</div>
+<div class="tabs-cover">
+  <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+    <thead  class="plain">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>NIC No.</th>
+      <th>Mobile Number</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of inactiveUsers">
+      <td>{{user.firstName}} {{user.lastName}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.nic}}</td>
+      <td>{{user.mobileNumber}}</td>
+      <td>
+        <div class="btn-group action-panel">
+          <button type="button" class="btn btn-success delete-user" (click)="viewCustomer(user)">
+            <i class="fa fa-building" aria-hidden="true"></i> View
+          </button>
+          <button type="button" class="btn btn-danger" data-target="#deactivate-User" (click)="openDeactivateUserModel(user)">
+            <i class="fa fa-ban" aria-hidden="true"></i> Activate
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

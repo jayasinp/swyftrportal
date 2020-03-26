@@ -1,0 +1,125 @@
+<div class="modal-header">
+    <button type="button" class="close" (click)="dismiss()">&times;</button>
+    <h4>Create a new product for '{{branchName}}'</h4>
+</div>
+<div class="modal-body">
+    <div class="form">
+
+        <div class="form-group" [class.has-error]="!product.imageId">
+            <div class="image-upload ">
+                <label for="file-input">
+                    <a class="upload-btn">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span *ngIf="!currentFileItem">Click Here To Upload Product Image</span>
+                        <span *ngIf="currentFileItem">{{currentFileItem._file.name}}</span>
+                    </a>
+                </label>
+                <input type="file" name="image" (change)="selectImage($event)" />
+                <!-- <input id="file-input" type="file" ng2FileSelect [uploader]="fileUploader" /> -->
+            </div>
+            <div class="validation-messege error" *ngIf="!product.imageId">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Please upload a product image
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!productName.valid">
+            <input type="text" class="form-control" [(ngModel)]="product.productName" [formControl]="productName">
+            <label>Product Name</label>
+            <div class="validation-messege error" *ngIf="!productName.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Product Name Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!productCode.valid">
+            <input type="text" class="form-control" [(ngModel)]="product.productCode" [formControl]="productCode">
+            <label>Product Code</label>
+            <div class="validation-messege error" *ngIf="!productCode.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Product Code Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!maincategory.valid">
+            <ng-select [allowClear]="false" [items]="mainCatArr" [(ngModel)]="mainCat" placeholder="Select Main Category" (selected)="loadSubCategory($event.id)"
+                [formControl]="maincategory">
+            </ng-select>
+            <div class="validation-messege error" *ngIf="!maincategory.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Main Category Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!categoryId.valid">
+            <ng-select [allowClear]="false" [items]="subCatArr" [(ngModel)]="subCat" placeholder="Select Sub Category" (selected)="onSelectCategory($event.id)"
+                [formControl]="categoryId">
+            </ng-select>
+            <div class="validation-messege error" *ngIf="!categoryId.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Sub Category Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!tagCntrl.valid">
+            <ng-select [allowClear]="false" [items]="partnerTagArr" placeholder="Select Product Tag" (selected)="onSelectTag($event.id)"
+                [formControl]="tagCntrl">
+            </ng-select>
+            <div class="validation-messege error" *ngIf="!tagCntrl.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Tag Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!quantity.valid">
+            <input type="text" class="form-control" [(ngModel)]="product.quantity" [formControl]="quantity">
+            <label>Quentity</label>
+            <div class="validation-messege error" *ngIf="!quantity.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Quentity Is Required
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!unitPrice.valid">
+            <input type="text" class="form-control" [(ngModel)]="product.unitPrice" [formControl]="unitPrice">
+            <label>Unit Price</label>
+            <div class="validation-messege error" *ngIf="!unitPrice.valid">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Unit Price Is Required
+            </div>
+        </div>
+
+        <!-- 
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.discount">
+            <label>Discount (% value)</label>
+        </div> -->
+
+	<div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.discount">
+            <label>Agreed Swyftr mark up (% value)</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.sftrDiscount">
+            <label>Swyftr Fee (% value)</label>
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.description">
+            <label>Description</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="product.specialNote">
+            <label>Remark</label>
+        </div>
+
+        <label style="float:left;margin-right:10px;margin-top: -3px;">Availability</label>
+        <label class="switch">
+            <input type="checkbox" [(ngModel)]="isAvailable">
+            <span class="slider round"></span>
+        </label>
+
+        <div class="button-row right-align">
+            <button type="submit" *ngIf="!createButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="createProduct()">Create</button>
+            <button type="submit" *ngIf="createButtonClicked" class="btn btn-default form-buttons inline-btn">
+                <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Creating Product...
+            </button>
+            <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()">Cancel</button>
+        </div>
+    </div>
+</div>

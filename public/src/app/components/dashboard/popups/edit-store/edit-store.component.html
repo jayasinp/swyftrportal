@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()" >&times;</button>
+  <h4>Update Store '{{store.branchName}}'</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+
+    <div class="form-group">
+      <h4>Branch Location</h4>
+      <app-map-marker (onLocationMarked)="onLocationMarked($event)" [center]="center" [points]="locationPoint">
+
+      </app-map-marker>
+      <div class="validation-messege error" *ngIf="!store.latitude || !store.longitude">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Mark store on the map
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!address.valid">
+      <input type="text" class="form-control" [(ngModel)]="store.address" [formControl]="address">
+      <label>Store Address</label>
+      <div class="validation-messege error" *ngIf="!address.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Store Address Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!phone.valid">
+      <input type="text" class="form-control" [(ngModel)]="store.phone" [formControl]="phone">
+      <label>Phone Number</label>
+      <div class="validation-messege error" *ngIf="!phone.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Phone Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ng-select
+        [allowClear]="false" [items]="empArr" placeholder="Select Store Manager" (selected)="onStorManagerSelected($event.id)">
+      </ng-select>
+    </div>
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!createButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="updateStore()" >Update</button>
+      <button type="submit" *ngIf="createButtonClicked" class="btn btn-default form-buttons inline-btn">
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Updating Store...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()" >Cancel</button>
+    </div>
+  </div>
+</div>

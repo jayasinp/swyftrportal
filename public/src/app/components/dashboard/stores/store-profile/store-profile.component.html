@@ -1,0 +1,86 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>
+        <a [routerLink]="['manage-partners']">Partners</a>
+      </h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">
+        <a [routerLink]="['/home/manage-partners']">Store</a>
+      </h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">
+        <a [routerLink]="['/home/partner-profile', store.orgId]">{{store.orgName}}</a>
+      </h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{store.branchName}}</h2>
+      <ul class="nav tab-navigator">
+        <li class="active">
+          <a data-toggle="tab" href="#overview" (click)="selectTab(0)">Overview</a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#storeDetails" (click)="selectTab(1)">Product Details</a>
+        </li>
+        <li class="">
+          <a data-toggle="tab" href="#reports" (click)="selectTab(2)">Reports</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="content-cover" style="max-height: 100%">
+  <div class="wide-container user-profile">
+    <div class="user-details">
+      <div class="profile-image">
+        <app-show-markers [points]="locations"></app-show-markers>
+      </div>
+      <div class="profile-data">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a data-toggle="tab" href="#home">Details</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="data-set">
+              <h6>Branch Name</h6>
+              <p>{{store.branchName}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Address</h6>
+              <p>{{store.address}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>District</h6>
+              <p>{{store.district}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Province</h6>
+              <p>{{store.province}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Phone</h6>
+              <p>{{store.phone}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <tabset #storeTabs>
+        <tab heading="Overview">
+          <app-products-overview></app-products-overview>
+        </tab>
+        <tab heading="Product Details">
+          <app-products [store]="store" [products]="products"></app-products>
+        </tab>
+        <tab heading="Product Reports">
+          <app-reports [store]="store" [reports]="reports"></app-reports>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

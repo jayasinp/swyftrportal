@@ -1,0 +1,108 @@
+<div class="sidebar-page">
+  <div class="sidebar-fader"></div>
+  <div class="sidebar">
+    <div class="logo">
+      <a href="#_" class="mobile-back"></a>
+      <a href="#_">
+        <img src="img/logo-white-bg.png" />
+      </a>
+    </div>
+    <div class="main-menu">
+      <ul>
+        <li *ngxPermissionsExcept="['RIDER_PARTNER_LOGIN']" [class.active]="activeSideBarLink==='dashboard'">
+          <a [routerLink]="['dashboard']" (click)="navigateSideBar('dashboard')">
+            <span class="flaticon-dashboard icons"> </span>
+            Dashboard
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['SUPER_USER_SWYFTR', 'VIEW_USERS', 'MANAGE_USERS']" [class.active]="activeSideBarLink==='users'">
+          <a [routerLink]="['manage-users']" (click)="navigateSideBar('users')">
+           <span class="flaticon-group icons"> </span>
+            Users
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['SUPER_USER_SWYFTR', 'MANAGE_CUSTOMERS']" [class.active]="activeSideBarLink==='customers'">
+          <a [routerLink]="['manage-customers']" (click)="navigateSideBar('customers')">
+             <span class="flaticon-people icons"> </span>
+            Customers
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['SUPER_USER_SWYFTR', 'VIEW_PARTNERS', 'MANAGE_PARTNERS']" [class.active]="activeSideBarLink==='partners'">
+          <a [routerLink]="['manage-partners']" (click)="navigateSideBar('partners')">
+           <span class="flaticon-shop icons"> </span>
+            Partners
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" [class.active]="activeSideBarLink==='rider-orders'">
+          <a [routerLink]="['rider-orders']" (click)="navigateSideBar('rider-orders')">
+            <i class="fas fa-calendar-check fa-lg"></i>
+            Rider Orders
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" [class.active]="activeSideBarLink==='rider-map'">
+          <a [routerLink]="['rider-map']" (click)="navigateSideBar('rider-map')">
+            <i class="fas fa-map fa-lg"></i>
+            Rider Map
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['RIDER_PARTNER_LOGIN']" [class.active]="activeSideBarLink==='riders'">
+          <a [routerLink]="['manage-riders']" (click)="navigateSideBar('riders')">
+            <i class="fas fa-shipping-fast fa-lg"></i>
+            Riders
+          </a>
+        </li>
+        <li *ngxPermissionsOnly="['STORE_MANAGER_PRODUCT']" [class.active]="activeSideBarLink==='manage-product'">
+          <a [routerLink]="['manage-product:id', {id:loginUser.userId}]" (click)="navigateSideBar('manage-product')">
+  <!-- loginUser.orgId  -->
+            <i class="flaticon-shop icons"></i>
+            Manage Products
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrapper get-height " >
+    <header id="header">
+      <a href="#_" class="burdger-menu">
+        <div class="small-logo">
+          <img src="img/logo-white-bg.png" />
+        </div>
+      </a>
+      <div class="wide-container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="search-box">
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="profile-widget">
+            <!-- <img class="image" *ngIf="profilePicture" src="data:{{profilePicture.fileType}};base64,{{profilePicture.data}}" /> -->
+              <img class="image" *ngIf="profilePicture" src=" uploads/logo.png" />
+              <div *ngIf="!profilePicture" class="image">
+
+              </div>
+              <div class="details">
+                <h4>
+                  Welcome,
+                  <b>{{getFullName()}}</b>
+                  <small>Organization - {{getOrgName()}}</small>
+                </h4>
+                <i class="fa fa-angle-down menu-down" aria-hidden="true"></i>
+              </div>
+              <div class="drop-down-menu">
+                <ul>
+                  <li><a [routerLink]="['profile']" >Profile</a></li>
+                  <li (click)="logout()"><a>Log out</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

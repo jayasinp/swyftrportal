@@ -1,0 +1,2 @@
+ALTER TABLE `ORG_BRANCH` 
+DROP COLUMN `online`;

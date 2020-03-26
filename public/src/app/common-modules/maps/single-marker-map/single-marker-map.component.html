@@ -1,0 +1,9 @@
+<ngui-map zoom="15" center="{{center}}" [geoFallbackCenter]="[6.869761, 79.873438]">
+  <drawing-manager [drawingMode]="'marker'" [drawingControl]="true"
+                   [drawingControlOptions]="{position: 2, drawingModes: ['marker']}"
+                   [circleOptions]="{fillColor: '#ffff00', fillOpacity: 0.4, strokeWeight: 3, editable: true, zIndex: 1}">
+  </drawing-manager>
+  <marker *ngFor="let point of points" [position]="point"></marker>
+</ngui-map>
+
+<!--<button [disabled]="overlayList?.length == 0" md-raised-button color="warn" (click)="deleteSelectedOverlay()" >Delete</button>-->

@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()" >&times;</button>
+  <h4>Create a new Rider</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+    <div class="form-group" [class.has-error]="!firstNameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.firstName" [formControl]="firstNameCntrl">
+      <label>First Name</label>
+      <div class="validation-messege error" *ngIf="!firstNameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> First Name Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!lastNameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.lastName" [formControl]="lastNameCntrl">
+      <label>Last Name</label>
+      <div class="validation-messege error" *ngIf="!lastNameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Last Name Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!emailCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.email" [formControl]="emailCntrl">
+      <label>Official Email Address</label>
+      <div class="validation-messege error" *ngIf="!emailCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Email Address Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!mobileCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.mobileNo" [formControl]="mobileCntrl">
+      <label>Mobile No.</label>
+      <div class="validation-messege error" *ngIf="!mobileCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Mobile Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!nicCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.nic" [formControl]="nicCntrl">
+      <label>NIC</label>
+      <div class="validation-messege error" *ngIf="!nicCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> NIC Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!licenseNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.license" [formControl]="licenseNoCntrl">
+      <label>License No.</label>
+      <div class="validation-messege error" *ngIf="!licenseNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> License No. Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!vehicleNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.vehicalNo" [formControl]="vehicleNoCntrl">
+      <label>Vehicle No.</label>
+      <div class="validation-messege error" *ngIf="!vehicleNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Vehicle No. Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!addressCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="riderUser.address" [formControl]="addressCntrl">
+      <label>Address</label>
+      <div class="validation-messege error" *ngIf="!addressCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Address Is Required
+      </div>
+    </div>
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!createButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="createRider()" >Create</button>
+      <button type="submit" *ngIf="createButtonClicked" class="btn btn-default form-buttons inline-btn">
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Creating Rider...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()" >Cancel</button>
+    </div>
+  </div>
+</div>

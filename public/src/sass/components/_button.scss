@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+$btn-font-size: 16px;
+
+a:hover{
+	text-decoration: none;
+}
+.login-form{
+	.btn{
+		padding: 10px 15px;
+		font-size: $btn-font-size; 
+		height: 50px;
+
+	}
+}
+.btn {
+
+	    border-radius: 3px;
+	text-align: center; 
+	font-size: 16px; 
+	text-transform: uppercase; 
+	font-weight: 600;
+	outline: none;
+	    padding: 7px 30px;
+	&:focus, &:active ,&:focus:active{ 
+		outline: none;
+		background: $brand-color;
+		border: 1px solid $brand-color;
+	}
+
+	&.btn-primary{
+		background: $brand-color;
+		border: 1px solid $brand-color;
+		&:hover{
+			background: darken( $brand-color, 5% );
+		}
+	}
+	&.btn-danger{
+		background: $brand-color;
+		&:hover{
+			background: darken( $brand-color, 5% );
+		}
+	}
+	&.btn-default{
+		    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+	}
+}
+
+.page-title-bar{
+	.page-filter{
+		.btn{
+			border-radius: 50px; 
+		}
+	} 
+} 
+
+.action-panel{
+	.btn {
+		font-size: 14px;
+	}
+}

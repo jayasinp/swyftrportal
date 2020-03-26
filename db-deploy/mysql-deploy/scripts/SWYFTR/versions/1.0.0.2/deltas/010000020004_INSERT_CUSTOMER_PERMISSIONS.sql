@@ -1,0 +1,2 @@
+INSERT INTO `PERMISSION_TYPES` (`id`, `name`, `description`) VALUES ('9', 'MANAGE_CUSTOMERS', 'Manager customer mobile app users');
+INSERT INTO `PERMISSION_TYPES` (`id`, `name`, `description`) VALUES ('10', 'DEACTIVATE_CUSTOMERS', 'Deactivate customer mobile app users');

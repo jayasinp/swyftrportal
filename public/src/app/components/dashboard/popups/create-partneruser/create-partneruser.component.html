@@ -1,0 +1,123 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()">&times;</button>
+  <h4>Create a new partner</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+    <div class="form-group" [class.has-error]="!partnerOrg.logoId">
+      <div class="image-upload ">
+        <label for="file-input">
+          <a class="upload-btn">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span *ngIf="!currentFileItem">Click Here To Upload Partner Logo</span>
+            <span *ngIf="currentFileItem">{{currentFileItem._file.name}}</span>
+          </a>
+        </label>
+        <input type="file" name="image" (change)="selectImage($event)" />
+        <!-- <input id="file-input" type="file" ng2FileSelect [uploader]="fileUploader" /> -->
+      </div>
+      <div class="validation-messege error" *ngIf="!partnerOrg.logoId">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Please upload a partner logo
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!orgNameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.name" [formControl]="orgNameCntrl">
+      <label>Organiization Name</label>
+      <div class="validation-messege error" *ngIf="!orgNameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Organization Name Is Required
+      </div>
+    </div>
+
+    <div class="btn-group" dropdown style="margin-bottom: 1.5em">
+      <button dropdownToggle type="button" class="btn btn-default dropdown-toggle">
+        {{partnerOrg.orgType && partnerOrg.orgType !== '' ? getPartnerName(partnerOrg.orgType) : 'Partner Type'}}
+        <span class="caret"></span>
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
+        <li role="menuitem" *ngFor="let partnerType of partnerTypeArr" (click)="onPartnerTypeChanged(partnerType)">
+          <a class="dropdown-item">{{partnerType.name}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group" [class.has-error]="!headOfficeAddressCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.headOfficeAddress" [formControl]="headOfficeAddressCntrl">
+      <label>Head Office Address</label>
+      <div class="validation-messege error" *ngIf="!headOfficeAddressCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Head Office Address Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!headOfficeContactNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.headOfficeContactNo" [formControl]="headOfficeContactNoCntrl">
+      <label>Head Office Phone</label>
+      <div class="validation-messege error" *ngIf="!headOfficeContactNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Head Office Phone Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!pointOcContactNameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.pointOfContactName" [formControl]="pointOcContactNameCntrl">
+      <label>Appointed Officer By Partner</label>
+      <div class="validation-messege error" *ngIf="!pointOcContactNameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Appointed Officer Name By Partner Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!pointOcContactNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.pointOfContactMobile" [formControl]="pointOcContactNoCntrl">
+      <label>Partner Appointed Officer's Phone</label>
+      <div class="validation-messege error" *ngIf="!pointOcContactNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Partner Appointed Officer's Phone Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ng-select [allowClear]="false" [items]="paymentMethodArr" placeholder="Prefered Payment Method" (selected)="onPaymentMethodSelected($event.id)">
+      </ng-select>
+    </div>
+
+    <div *ngIf="partnerOrg.preferedPaymentMethod === 'online_transfers'" class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.bank">
+      <label>Partner's Bank Name</label>
+    </div>
+
+    <div *ngIf="partnerOrg.preferedPaymentMethod === 'online_transfers'" class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.bankSwiftCode">
+      <label>Partner's Bank SWIFT Code</label>
+    </div>
+
+    <div *ngIf="partnerOrg.preferedPaymentMethod === 'online_transfers'" class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.branch">
+      <label>Partner's Bank Branch Name</label>
+    </div>
+
+    <div *ngIf="partnerOrg.preferedPaymentMethod === 'online_transfers'" class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.branchCode">
+      <label>Partner's Bank Branch Code</label>
+    </div>
+
+    <div *ngIf="partnerOrg.preferedPaymentMethod === 'online_transfers'" class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="partnerOrg.accountNo">
+      <label>Partner's Bank Account No.</label>
+    </div>
+
+    <div class="form-group" [class.has-error]="!tagCntrl.valid">
+      <ng-select [allowClear]="false" [multiple]="true" [items]="mainTagArr" placeholder="Select Product Tag" (data)="refreshValue($event)"
+        [formControl]="tagCntrl">
+      </ng-select>
+      <div class="validation-messege error" *ngIf="!tagCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Tag Is Required
+      </div>
+    </div>
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!createButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="createPartner()">Create</button>
+      <button type="submit" *ngIf="createButtonClicked" class="btn btn-default form-buttons inline-btn">
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Creating Partner...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()">Cancel</button>
+    </div>
+  </div>
+</div>

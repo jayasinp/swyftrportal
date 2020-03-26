@@ -1,0 +1,8 @@
+*.log
+dist/
+.idea/
+node_modules/
+src/localConfigs/email.json
+public/src/sass/pages/_tablePage\.scss
+public/package-lock.json
+package-lock.json

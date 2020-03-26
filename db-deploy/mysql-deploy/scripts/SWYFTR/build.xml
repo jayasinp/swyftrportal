@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="swyftr_database_deployment" default="update">
+
+<property file="../../config/build.properties" />
+
+
+    <path id="mysql.classpath">
+        <fileset dir="../../lib">
+            <include name="mysql-connector-java-*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="dbdeploy.classpath">
+        <!-- include the dbdeploy-ant jar -->
+        <fileset dir="../../lib">
+            <include name="dbdeploy-ant-*.jar"/>
+        </fileset>
+
+        <!-- the dbdeploy task also needs the database driver jar on the classpath -->
+        <path refid="mysql.classpath" />
+
+    </path>
+
+    <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" classpathref="dbdeploy.classpath"/>
+
+    <target name="initialize" depends="create, update"/>    
+
+
+    <target name="create" description="Create SWYFTR DB">
+        <sql driver="${db.driver}" url="${common.db.url}"
+             userid="${sqluser}" password="${sqlpass}" classpathref="mysql.classpath" >
+            <fileset file="Initialize/Create_swyftr_db.sql"/>
+        </sql>
+    </target>
+
+    <target name="update">
+       <ant dir="./versions/1.0.0.0" target="1.0.0.3"/>
+    </target>
+
+</project>

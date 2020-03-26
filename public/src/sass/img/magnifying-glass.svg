@@ -1,0 +1,16 @@
+<svg width="21" height="21" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>magnifying-glass (5)</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1879 -1879)">
+<g id="magnifying-glass (5)">
+<g id="Group">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(1879 1879)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 20.7429 19.5086L 15.6943 14.46C 16.9457 12.9343 17.7 10.98 17.7 8.85C 17.7 3.96429 13.7357 0 8.85 0C 3.96 0 0 3.96429 0 8.85C 0 13.7357 3.96 17.7 8.85 17.7C 10.98 17.7 12.93 16.95 14.4557 15.6986L 19.5043 20.7429C 19.8471 21.0857 20.4 21.0857 20.7429 20.7429C 21.0857 20.4043 21.0857 19.8471 20.7429 19.5086ZM 8.85 15.9386C 4.93714 15.9386 1.75714 12.7586 1.75714 8.85C 1.75714 4.94143 4.93714 1.75714 8.85 1.75714C 12.7586 1.75714 15.9429 4.94143 15.9429 8.85C 15.9429 12.7586 12.7586 15.9386 8.85 15.9386Z"/>
+</defs>
+</svg>

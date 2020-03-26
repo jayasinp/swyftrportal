@@ -1,0 +1,1 @@
+INSERT INTO `PERMISSION_TYPES` (`id`, `name`, `description`) VALUES ('11', 'ASSIGN_RIDERS_TO_ORDERS', 'Assign riders to orders');

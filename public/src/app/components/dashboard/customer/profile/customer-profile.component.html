@@ -1,0 +1,67 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1><a [routerLink]="['/home/manage-customers']" >Customers</a></h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3"><a [routerLink]="['/home/manage-customers']" >Customers</a></h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{customer.firstName}} {{customer.lastName}}</h2>
+      <ul class="nav tab-navigator">
+        <li class="active"><a data-toggle="tab" href="#overview" (click)="selectTab(0)">Overview</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="content-cover" style="height: 100%" >
+  <div class="wide-container user-profile">
+    <div class="user-details">
+      <div class="profile-image">
+        <img *ngIf="!customerProfilePicture" src="img/default_profile_picture.jpg" />
+        <img *ngIf="customerProfilePicture" src="data:{{partnerLogo.fileType}};base64,{{partnerLogo.data}}" />
+      </div>
+      <div class="user-name">
+        <h3>{{customer.firstName}} {{customer.lastName}}</h3>
+      </div>
+      <div class="profile-data">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Details</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div class="data-set">
+              <h6>National Identity Card No</h6>
+              <p>{{customer.nic}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Email</h6>
+              <p>{{customer.email}}</p>
+            </div>
+
+            <div class="data-set" *ngIf="customer.mobileNumber">
+              <h6>Mobile Phone</h6>
+              <p>{{customer.mobileNumber}}</p>
+            </div>
+
+            <div class="data-set" *ngIf="customer.phoneNumber">
+              <h6>Land Phone</h6>
+              <p>{{customer.phoneNumber}}</p>
+            </div>
+
+            <div class="data-set">
+              <h6>Date of Birth</h6>
+              <p>{{customer.dateOfBirth}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content">
+      <tabset #partnerTabs>
+        <tab heading="Overview">
+          <h2>Customer purchase history goes here</h2>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

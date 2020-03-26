@@ -1,0 +1,50 @@
+<div class="page-title-bar">
+  <a class="btn btn-primary pull-right spacing-3" (click)="onCreateProductClicked(store)">Create Product</a>
+</div>
+
+<div class="tabs-cover">
+  <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+    <thead class="plain">
+      <tr>
+        <th>Product Name</th>
+	<th>Branch Name</th>
+        <th>Product Code</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Product Category</th>
+        <th>Swyftr mark up %</th>
+	<th>Swyftr Fee %</th>
+
+        <th>Availability</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.productName}}</td>
+	<td>{{product.branchName}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.unitPrice}}</td>
+        <td>{{product.categoryId}}</td>
+        <td>{{product.discount}}</td>
+	 <td>{{product.sftrDiscount}}</td>
+
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="prepareAvailability(product)"  (click)="updateAvailability(product)">
+            <!-- .availability -->
+            <span class="slider round"></span>
+          </label>
+        </td>
+        <td>
+          <div class="btn-group action-panel">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-store" (click)="openUpdateProductModel(product)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

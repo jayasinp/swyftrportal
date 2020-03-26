@@ -1,0 +1,32 @@
+<div>
+  <div class="dashboard-data">
+    <div class="col-xs-3">
+      <div class="data-widget error">
+        <div class="heading">
+          <img src="img/icons/boxes.svg" />
+          Orders Need a Rider
+        </div>
+        <div class="value">
+          <a [routerLink]="['/home/unassigned-orders']">{{unassignedOrders.length}}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+  <div class="content-cover ">
+    <div class="wide-container ">
+      <div class="kanban">
+        <div class="scroller">
+
+          <kanban-column [heading]="'Assigned'" [cancelEnable]="false" [normalPriorityOrders]="assignedArr" [highPriorityOrders]="[]"></kanban-column>
+          <kanban-column [heading]="'Rider Acknowledged'" [cancelEnable]="false" [normalPriorityOrders]="ackArr"  [highPriorityOrders]="[]"></kanban-column>
+          <kanban-column [heading]="'Picked Up'" [cancelEnable]="false" [normalPriorityOrders]="pickedUpArr" [highPriorityOrders]="[]"></kanban-column>
+
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

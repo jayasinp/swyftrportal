@@ -1,0 +1,47 @@
+<div class="page-title-bar">
+  <a class="btn btn-primary pull-right spacing-3" (click)="onCreateStoreClicked()" >Create Store</a>
+</div>
+
+<div class="tabs-cover">
+  <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+    <thead  class="plain">
+    <tr>
+      <th>Store ID</th>
+      <th>Branch Name</th>
+      <th>Address</th>
+      <th>District</th>
+      <th>Phone No.</th>
+      <th>Actions</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let store of stores">
+      <td>{{store.id}}</td>
+      <td>{{store.branchName}}</td>
+      <td>{{store.address}}</td>
+      <td>{{store.district}}</td>
+      <td>{{store.phone}}</td>
+      <td>
+        <div class="btn-group action-panel">
+          <button type="button" class="btn btn-success delete-user" (click)="viewStoreProfile(store)">
+            <i class="fa fa-building" aria-hidden="true"></i> View
+          </button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-store" (click)="openEditStore(store)">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+          </button>
+          <!--<button type="button" class="btn btn-danger" data-target="#deactivate-store" >-->
+            <!--<i class="fa fa-ban" aria-hidden="true"></i>Deactivate-->
+          <!--</button>-->
+        </div>
+      </td>
+      <td>
+        <button type="button" class="btn {{store.onlineStatus ? 'btn-success': 'btn-danger'}}"
+        (click)="toggleStatus(store)" >
+          {{store.onlineStatus ? 'Online': 'Offline'}}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

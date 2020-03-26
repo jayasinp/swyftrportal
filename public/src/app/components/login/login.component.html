@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="login-page get-height">
+    <div class="login-form panel panel-default">
+      <div class="panel-body form text-center">
+        <div class="logo-cover">
+          <img src="img/logo.png" />
+        </div>
+        <div class="heading">
+          <h5></h5>
+        </div>
+        <div class="form-group" *ngIf="!userNameErrorMessage || userNameErrorMessage === ''">
+          <input type="text" [(ngModel)]="email" [formControl]="loginEmailController" class="form-control" id="userName" placeholder="Email"  required>
+        </div>
+        <div class="form-group has-error" *ngIf="userNameErrorMessage && userNameErrorMessage !== ''" >
+          <input type="text" [(ngModel)]="email" [formControl]="loginEmailController" class="form-control" id="userName" placeholder="Email"  required>
+
+          <div class="validation-messege error">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> {{userNameErrorMessage}}
+          </div>
+        </div>
+
+
+        <div class="form-group " *ngIf="!passwordErrorMessage || passwordErrorMessage === ''">
+          <input type="password" [(ngModel)]="password" [formControl]="loginPasswordController" class="form-control " id="pwd" value="" placeholder="Password" required>
+        </div>
+        <div class="form-group has-error" *ngIf="passwordErrorMessage && passwordErrorMessage !== ''" >
+          <input type="password" [(ngModel)]="password" [formControl]="loginPasswordController" class="form-control " id="pwd" value="" placeholder="Password" required>
+
+          <div class="validation-messege error">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> {{passwordErrorMessage}}
+          </div>
+        </div>
+
+        <button type="button" *ngIf="!isLoginClicked" (click)="login()" class="btn btn-primary btn-block">Login</button>
+        <button type="button" *ngIf="isLoginClicked" class="btn btn-primary btn-block">
+          <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Authenticating...
+        </button>
+
+        <div class="form-group has-error" *ngIf="loginError && loginError !== ''" >
+          <div class="validation-messege error">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> {{loginError}}
+          </div>
+        </div>
+
+        <div class="link-panel">
+          <a (click)="onForgotPasswordClicked()">Forgot Your password ?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

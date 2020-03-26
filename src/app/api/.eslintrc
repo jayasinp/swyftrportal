@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "extends": ["../../../.eslintrc"],
+  "rules": {
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": false,
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": false
+      }
+    }]
+  }
+}

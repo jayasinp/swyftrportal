@@ -1,0 +1,30 @@
+<div class="row" style="margin: 2em">
+  <div class="col-md-4">
+    <span class="color-box" style="background-color: black"></span>
+    OFFLINE
+  </div>
+  <div class="col-md-4">
+    <span class="color-box" style="background-color: #00C000"></span>
+    ONLINE / AVAILABLE
+  </div>
+  <div class="col-md-4">
+    <span class="color-box" style="background-color: #FF8000"></span>
+    ASSIGNED / DELIVERY ACCEPTED / ON DELIVERY
+  </div>
+</div>
+
+<ngui-map zoom="13" style="height: 80%;" center="{{center}}" [geoFallbackCenter]="[6.869761, 79.873438]">
+  <marker *ngFor="let pos of points; let i = index"
+          [position]="[pos.location._lat, pos.location._long]"
+          [icon]="getIcon(pos)"
+          (click)="markerClicked($event, pos)"
+  >
+  </marker>
+  <info-window id="iw">
+    <div *ngIf="selectedPointForInfoWindow" style="width: 15em">
+      <span class="row">Name: {{selectedPointForInfoWindow.name}}</span>
+      <span class="row">Mobile No: {{selectedPointForInfoWindow.mobile}}</span>
+      <span class="row">Status: {{selectedPointForInfoWindow.status}}</span>
+    </div>
+  </info-window>
+</ngui-map>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="1.0.0.0" default="1.0.0.0">
+
+<property file="../../../../config/build.properties" />
+
+<import file="../../dependencies.xml"/>
+
+</project>

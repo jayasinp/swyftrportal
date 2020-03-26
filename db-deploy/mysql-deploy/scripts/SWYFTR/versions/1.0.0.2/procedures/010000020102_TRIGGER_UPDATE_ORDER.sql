@@ -1,0 +1,3 @@
+CREATE TRIGGER updateOrder AFTER UPDATE ON ORDER_BRANCH_STOCK
+FOR EACH ROW
+UPDATE BRANCH_STOCK SET qty = (qty + OLD.quantity)-NEW.quantity WHERE id = NEW.branch_stock_id;

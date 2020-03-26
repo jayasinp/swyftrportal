@@ -1,0 +1,104 @@
+<div class="sub-menu" *ngIf="!riderManagerOrderArray">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>Orders management</h1>
+    </div>
+
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">Orders</h2>
+    </nav>
+  </div>
+</div>
+<div class="content-cover ">
+  <div class="wide-container ">
+    <div class="page-title">
+      <div class="clearfix"> </div>
+    </div>
+    <div class="tabs-cover">
+      <table *ngIf="ordersArray && ordersArray.length > 0" datatable id="orders" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+        <thead  class="plain">
+        <tr>
+          <th>ID</th>
+          <th>Post By User</th>
+          <th>Delivery Required</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Store Partner</th>
+          <th>Branch</th>
+          <th>Rider</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of ordersArray">
+          <td>{{order.orderId}}</td>
+          <td>{{order.cusName}}</td>
+          <td>{{order.deliveryRequired? 'Yes': 'No'}}</td>
+          <td>{{getDate(order.orderDate)}}</td>
+          <td>{{getOrderStatus(order.status)}}</td>
+          <td>{{order.orgName}}</td>
+          <td>{{order.branchName}}</td>
+          <td>{{order.riderId? order.riderName: 'Not Assigned'}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="riderOrderArray && riderOrderArray.length > 0" datatable id="rider_orders" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+        <thead  class="plain">
+        <tr>
+          <th>ID</th>
+          <th>Post By User</th>
+          <th>Delivery Required</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Store Partner</th>
+          <th>Branch</th>
+          <th>Rider</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of riderOrderArray">
+          <td>{{order.orderId}}</td>
+          <td>{{order.cusName}}</td>
+          <td>{{order.deliveryRequired? 'Yes': 'No'}}</td>
+          <td>{{getDate(order.orderDate)}}</td>
+          <td>{{getOrderStatus(order.status)}}</td>
+          <td>{{order.orgName}}</td>
+          <td>{{order.branchName}}</td>
+          <td>
+            <div class="btn-group action-panel">
+              <button *ngxPermissionsOnly="['ASSIGN_RIDERS_TO_ORDERS']" type="button" class="btn btn-success" (click)="assignARider(order)">
+                <i *ngIf="!order['loading']" class="fa fa-building" aria-hidden="true"></i>
+                <i *ngIf="order['loading']" class="fas fa-cog fa-spin"></i>
+                Assign
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="riderManagerOrderArray && riderManagerOrderArray.length > 0" datatable id="rider-man-order" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+        <thead  class="plain">
+        <tr>
+          <th>ID</th>
+          <th>Post By User</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Store Partner</th>
+          <th>Branch</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of riderManagerOrderArray">
+          <td>{{order.orderId}}</td>
+          <td>{{order.cusName}}</td>
+          <td>{{getDate(order.orderDate)}}</td>
+          <td>{{getOrderStatus(order.status)}}</td>
+          <td>{{order.orgName}}</td>
+          <td>{{order.branchName}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

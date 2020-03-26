@@ -1,0 +1,41 @@
+<!--
+States
+---------------
+
+sheduled
+normal
+critical
+
+-->
+
+<div class="task"
+  [class.normal]="getClasstype() === 'normal'"
+  [class.sheduled]="getClasstype() === 'sheduled'"
+>
+  <!-- show if high priority -->
+  <div class="priority-bar" *ngIf="false">
+   <i class="fas fa-history"></i> 10 min
+  </div>
+
+  <div class="order-id">
+    <span><b>Order ID</b> : {{order.orderId}} </span>
+    <div *ngIf="isHighPriority" class="priority">High Priority</div>
+
+    <!-- change this based on scheduled or not -->
+    <div class="priority Sheduled" *ngIf="getClasstype() === 'sheduled'">
+      Scheduled
+    </div>
+  </div>
+  <div class="order-distance">
+    <span><b>Distance </b>: {{distanceInKm}} km </span> <span><b>Order </b>: {{order.products}}</span>
+  </div>
+  <div class="order-detail">
+
+  </div>
+  <div class="overlays">
+    <div class="button-panel">
+      <a href="#_" class="btn btn-default" data-toggle="modal" (click)="onViewButtonClicked()"> View </a>
+      <a *ngIf="confirmButton && isConfirmationButtonEnabled()" class="btn btn-primary" (click)="onConfirmButtonClicked()"> {{confirmButton}} </a>
+    </div>
+  </div>
+</div>

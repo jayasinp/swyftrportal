@@ -1,0 +1,12 @@
+CREATE TABLE `FRIEND_RECEIVE_COLLECTOR` (
+  `rider_id` bigint(20) NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `signature` bigint(20) DEFAULT NULL,
+  `collector_name` varchar(100) DEFAULT NULL,
+  `collector_contact` varchar(20) DEFAULT NULL,
+  `collector_nic` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`rider_id`,`order_id`),
+  KEY `FK_FRIEND_RECEIVE_COLLECTOR_2_idx` (`order_id`),
+  CONSTRAINT `FK_FRIEND_RECEIVE_COLLECTOR_1` FOREIGN KEY (`rider_id`) REFERENCES `SYS_USER_PROFILE` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_FRIEND_RECEIVE_COLLECTOR_2` FOREIGN KEY (`order_id`) REFERENCES `ORDER` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,0 +1,115 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>Users</h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">Profile</h2>
+      <h2 class="pull-left spacing-3 breadcrumb-path">{{profile.firstName}} {{profile.lastName}}</h2>
+
+      <a class="btn btn-primary pull-right spacing-3" style="margin-left: 0.5em" data-toggle="modal" data-target="#edit-User" *ngIf="!isEditable" (click)="openChangePasswordDialog()" >
+        Change Password
+      </a>
+
+      <a class="btn btn-primary pull-right spacing-3" data-toggle="modal" data-target="#edit-User" (click)="updateProfile()" >
+        <span *ngIf="isEditable">Cancel</span>
+        <span *ngIf="!isEditable">Edit Details</span>
+      </a>
+
+      <a class="btn btn-primary pull-right spacing-3" style="margin-right: 0.5em" data-toggle="modal" data-target="#edit-User" *ngIf="isEditable" (click)="updateData()" >
+        Update
+      </a>
+    </nav>
+
+  </div>
+</div>
+<div class="content-cover" style="max-height: 100%" >
+  <div class="wide-container user-profile admin-user">
+    <div class="user-details">
+      <div class="profile-image">
+        <img *ngIf="!profilePicture" src="img/default_profile_picture.jpg" />
+        <img *ngIf="profilePicture" src="data:{{profilePicture.fileType}};base64,{{profilePicture.data}}" />
+      </div>
+      <div class="user-name">
+        <h3>{{profile.firstName}} {{profile.lastName}}</h3>
+        <h4>{{organization.name}} ({{profile.designation}})</h4>
+        <span><b>Branch/Shop :</b> Keels super </span>
+      </div>
+      <div class="profile-data">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Details</a></li>
+          <li *ngIf="!isEditable" ><a data-toggle="tab" href="#menu1">Permisions</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <div *ngIf="!isEditable">
+              <div class="data-set">
+                <h6>Email</h6>
+                <p>{{profile.email}}</p>
+              </div>
+
+              <div class="data-set">
+                <h6>Mobile Number</h6>
+                <p>{{profile.mobileNumber}}</p>
+              </div>
+
+              <div class="data-set">
+                <h6>Land Phone Number</h6>
+                <p>{{profile.phoneNumber}}</p>
+              </div>
+
+              <div class="data-set">
+                <h6>NIC</h6>
+                <p>{{profile.nic}}</p>
+              </div>
+
+              <div class="data-set">
+                <h6>Address</h6>
+                <p>{{profile.address}}</p>
+              </div>
+            </div>
+            <div *ngIf="isEditable" >
+              <!-- TODO update non sensitive data if any -->
+              <div class="form-group" >
+                <label>First Name</label>
+                <input type="text" class="form-control" [(ngModel)]="profile.firstName">
+              </div>
+
+              <div class="form-group" >
+                <label>Last Name</label>
+                <input type="text" class="form-control" [(ngModel)]="profile.lastName">
+              </div>
+
+              <div class="form-group" [class.has-error]="!profilePicture">
+                <div class="image-upload">
+                  <label for="file-input">
+                    <a class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Upload Profile Picture</a>
+                  </label>
+                  <input id="file-input" type="file" ng2FileSelect [uploader]="fileUploader" />
+                  <span class="form-control" *ngIf="currentFileItem">{{currentFileItem._file.name}}</span>
+                </div>
+                <div class="validation-messege error" *ngIf="!profilePicture">
+                  <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Please upload a profile picture
+                </div>
+              </div>
+
+              <div class="button-row right-align">
+                <button type="submit" *ngIf="!updateButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="updateData()" >Update</button>
+                <button *ngIf="updateButtonClicked" class="btn btn-default form-buttons inline-btn">
+                  <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Updating User...
+                </button>
+                <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="updateProfile()" >Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div id="menu1" class="tab-pane fade permission-tab" *ngIf="!isEditable">
+            <div class="chip" *ngFor="let permName of permissions">
+              {{permName}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

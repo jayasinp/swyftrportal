@@ -1,0 +1,30 @@
+<div class="piechart-section" *ngIf="showChart">
+    <H4>Last 30 Days Amount Wise Sales Summary</H4>
+  <ngx-charts-advanced-pie-chart 
+  [view]="viewpie" 
+  [scheme]="colorScheme" 
+  [results]="pieChartArr" 
+  [gradient]="gradient"
+  [label]="label">
+</ngx-charts-advanced-pie-chart>
+</div>
+
+<div class="barchart-section" *ngIf="showChart">
+  <H4>Last 30 Days Quantity Wise Sales Summary</H4>
+  <ngx-charts-bar-vertical 
+  [view]="viewbar" 
+  [scheme]="colorScheme" 
+  [results]="barChartArr" 
+  [gradient]="gradient" 
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis" 
+  [showXAxisLabel]="showXAxisLabel" 
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel" 
+  [yAxisLabel]="yAxisLabel">
+</ngx-charts-bar-vertical>
+</div>
+
+<div class="piechart-section" *ngIf="!showChart">
+<p>No Data Found</p>
+</div>

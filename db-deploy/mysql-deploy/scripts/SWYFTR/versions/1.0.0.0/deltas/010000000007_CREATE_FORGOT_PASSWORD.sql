@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `FORGOT_PASSWORD` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NULL,
+  `email` VARCHAR(45) NULL,
+  `token` VARCHAR(45) NULL,
+  `added_date` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `token_UNIQUE` (`token` ASC))
+ENGINE = InnoDB;

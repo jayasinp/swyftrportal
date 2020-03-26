@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()">&times;</button>
+  <h4>Update {{editPartner.name}}</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+
+    <div class="form-group" [class.has-error]="!editPartner.logoId">
+      <div class="image-upload ">
+        <label for="file-input">
+          <a class="upload-btn">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span *ngIf="!currentFileItem">Click Here To Upload Partner Logo</span>
+            <span *ngIf="currentFileItem">{{currentFileItem._file.name}}</span>
+          </a>
+        </label>
+        <input type="file" name="image" (change)="selectImage($event)" />
+        <!-- <input id="file-input" type="file" ng2FileSelect [uploader]="fileUploader" /> -->
+      </div>
+      <div class="validation-messege error" *ngIf="!editPartner.logoId">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Please upload a partner logo
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!nameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editPartner.name" [formControl]="nameCntrl">
+      <label>Company Name</label>
+      <div class="validation-messege error" *ngIf="!nameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>Company Name Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!addressCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editPartner.headOfficeAddress" [formControl]="addressCntrl">
+      <label>Head Office Address</label>
+      <div class="validation-messege error" *ngIf="!addressCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>Head Office Address Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!contactNoCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editPartner.headOfficeContactNo" [formControl]="contactNoCntrl">
+      <label>Head Office Contact Number</label>
+      <div class="validation-messege error" *ngIf="!contactNoCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>Head Office Contact Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!pocNameCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editPartner.pointOfContactName" [formControl]="pocNameCntrl">
+      <label>Point Of Contact Name</label>
+      <div class="validation-messege error" *ngIf="!pocNameCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>Point Of Contact Name Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!pocMobileCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editPartner.pointOfContactMobile" [formControl]="pocMobileCntrl">
+      <label>Point Of Contact Mobile Number</label>
+      <div class="validation-messege error" *ngIf="!pocMobileCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>Point Of Contact Mobile Number Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!tagCntrl.valid">
+      <ng-select [allowClear]="false" [(ngModel)]="partnerTagArr" [multiple]="true" [items]="mainTagArr" placeholder="Prefered Payment Method" (data)="refreshValue($event)"
+        [formControl]="tagCntrl">
+      </ng-select>
+      <div class="validation-messege error" *ngIf="!tagCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Tag Is Required
+      </div>
+    </div>
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!updateButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="onUpdatePartnerClicked()">Update</button>
+      <button type="submit" *ngIf="updateButtonClicked" class="btn btn-default form-buttons inline-btn">
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Updating Partner...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()">Cancel</button>
+    </div>
+  </div>
+</div>

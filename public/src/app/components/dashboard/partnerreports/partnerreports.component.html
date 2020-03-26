@@ -1,0 +1,104 @@
+<div class="content-cover ">
+  <div class="medium-container ">
+
+    <div class="col-xs-12">
+      <div class="page-title-bar">
+        <div class="btn-group page-filter" role="group">
+          <button type="button" id="srTab" (click)="change(0)" style="outline: none" class="btn btn-secondary active">Sales Report</button>
+          <button type="button" id="prTab" (click)="change(1)" style="outline: none" class="btn btn-secondary">Profit Report</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+
+        <div class="col-md-4 col-sm-6 columns">
+          <div class="form-group">
+            <label>Select Status</label>
+            <ng-select [allowClear]="false" [items]="statusArr" [(ngModel)]="selectStatus" placeholder="Select Status">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 columns">
+          <div class="form-group">
+            <label for="fromDate">From Date</label>
+            <input type="text" placeholder="From Date" class="form-control" [(ngModel)]="fromDate" [maxDate]="maxDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              bsDatepicker/>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 columns">
+          <div class="form-group">
+            <label for="toDate">To Date</label>
+            <input type="text" placeholder="To Date" class="form-control" [(ngModel)]="toDate" [maxDate]="maxDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              bsDatepicker>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 columns" *ngIf="!rt">
+          <div class="form-group">
+            <label for="toDate">Payment Percentage</label>
+            <input type="number" class="form-control" [(ngModel)]="paymentpercentage"/>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 columns btn-panel">
+
+          <div class="col-sm-6 columns">
+            <a (click)="reset()" class="btn btn-light btn-block">Reset</a>
+          </div>
+
+          <div class="col-sm-6 columns">
+            <a (click)="search()" class="btn btn-danger btn-block">Search</a>
+          </div>
+
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+
+
+      <div class="tabs-cover" *ngIf="rt">
+        <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%" [dtOptions]="dtOptions">
+          <thead class="plain">
+            <tr>
+              <th>Branch Name</th>
+              <th>Total Quantity</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports">
+              <td>{{report.branchName}}</td>
+              <td>{{report.total}}</td>
+              <td>{{report.totalPrice}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tabs-cover" *ngIf="!rt">
+        <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%" [dtOptions]="dtOptions">
+          <thead class="plain">
+            <tr>
+              <th>Branch Name</th>
+              <th>Total Quantity</th>
+              <th>Total Amount</th>
+              <th>Payment Percentage</th>
+              <th>Profit Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports">
+              <td>{{report.branchName}}</td>
+              <td>{{report.total}}</td>
+              <td>{{report.totalPrice}}</td>
+              <td>{{paymentpercentage}}</td>
+              <td>{{getProfit(report)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

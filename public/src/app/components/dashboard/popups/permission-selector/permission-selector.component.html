@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()" >&times;</button>
+  <h4>Grant/Revoke Permissions To {{user.firstName}} {{user.lastName}}</h4>
+</div>
+<div class="modal-body">
+  <div class="tabs-cover">
+    <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+      <thead  class="plain">
+      <tr>
+        <th>Permission Name</th>
+        <th>Description</th>
+        <th>Allowed</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let perm of allPermissions">
+          <td>{{perm.name}}</td>
+          <td>{{perm.description}}</td>
+          <td>
+            <input type="checkbox" [checked]="resultPermission[perm.id]" (change)="onPermissionClicked(perm.id)">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="button-row right-align">
+    <button type="submit" *ngIf="!saveButtonClicked" class="btn btn-default inline-btn" (click)="onSavePermissionClicked()" >Save</button>
+    <button *ngIf="saveButtonClicked" class="btn btn-default inline-btn" >
+      <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Saving Permissions...
+    </button>
+    <button class="btn btn-danger inline-btn" (click)="dismiss()" >Cancel</button>
+  </div>
+</div>

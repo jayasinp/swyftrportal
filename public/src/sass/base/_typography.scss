@@ -1,0 +1,84 @@
+/**
+ * Basic typography style for copy text
+ */
+body {
+  color: $text-color;
+  font-family: $reguler-font;
+  font-size: 14px;
+  line-height: 1.5;
+} 
+
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+h1{
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.5;
+	text-align: center; 
+  text-transform: uppercase;  
+	margin: 0;
+  margin-bottom: 15px;
+
+} 
+
+h2{
+    font-family:$heading-font;
+  font-size: 25px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;	
+  text-transform: capitalize;
+}
+
+h3{
+	font-family:$heading-font;
+	font-size: 18px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.5; 
+	text-transform: uppercase;
+
+}
+h4{
+  font-size: 16px;   
+  font-weight: bold;   
+  font-style: normal;
+  font-stretch: normal; 
+  line-height: 1.5;
+  text-align: left; 
+  text-transform: uppercase; 
+  margin-bottom: 10px;
+
+}
+
+
+h5{ 
+  font-size: 14px;
+  font-weight: bold; 
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  text-align: center;
+}
+
+h6{
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+p{
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 12px;
+}

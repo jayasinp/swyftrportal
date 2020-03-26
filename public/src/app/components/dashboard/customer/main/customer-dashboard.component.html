@@ -1,0 +1,26 @@
+<div class="sub-menu">
+  <div class="wide-container">
+    <div class="mobile-heading">
+      <h1>Customer management</h1>
+    </div>
+    <nav class="navbar ">
+      <h2 class="pull-left spacing-3">Customers</h2>
+      <ul class="nav navbar-nav">
+        <li [ngClass]="{active: activeTab === 'active_cus'}"><a (click)="reloadAndSelectTables(0)"> Active </a></li>
+        <li [ngClass]="{active: activeTab === 'inactive_cus'}"><a (click)="reloadAndSelectTables(1)">Inactive</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="content-cover ">
+  <div class="tab-content">
+    <tabset #customerTabs >
+      <tab heading="Active Users">
+        <app-active-customers [activeUsers]="activeUserArray" (reloadTable)="reloadAndSelectTables($event)"></app-active-customers>
+      </tab>
+      <tab heading="Deactivated Users">
+        <app-inactive-customers [inactiveUsers]="inActiveUserArray" (reloadTable)="reloadAndSelectTables($event)"></app-inactive-customers>
+      </tab>
+    </tabset>
+  </div>
+</div>

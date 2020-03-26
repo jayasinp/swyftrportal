@@ -1,0 +1,82 @@
+<div class="modal-header">
+  <button type="button" class="close" (click)="dismiss()">&times;</button>
+  <h4>Update {{editProduct.productName}}</h4>
+</div>
+<div class="modal-body">
+  <div class="form">
+<a href="uploads/{{productImages}}" class="thumb">
+      <img class="image" *ngIf="productImages" src="uploads/{{productImages}}" target="_blank" style="max-height: 35px" />
+
+    </a>
+    <div class="form-group" [class.has-error]="!editProduct.assetIds">
+      <div class="image-upload ">
+        <label for="file-input">
+
+          <a class="upload-btn">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span *ngIf="!currentFileItem">Click Here To Upload Product Image</span>
+            <span *ngIf="currentFileItem">{{currentFileItem._file.name}}</span>
+          </a>
+        </label>
+        <input id="file-input" type="file" ng2FileSelect [uploader]="fileUploader" />
+      </div>
+      <div class="validation-messege error" *ngIf="!editProduct.assetIds">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Please upload a product image
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!tagCntrl.valid">
+      <ng-select [allowClear]="false" [(ngModel)]="productTagArr" [items]="partnerTagArr" placeholder="Select Product Tag" (selected)="onSelectTag($event.id)"
+        [formControl]="tagCntrl">
+      </ng-select>
+      <div class="validation-messege error" *ngIf="!tagCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Tag Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!quantityCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editProduct.quantity" [formControl]="quantityCntrl">
+      <label>Quantity</label>
+      <div class="validation-messege error" *ngIf="!quantityCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Quantity Is Required
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="!unitPriceCntrl.valid">
+      <input type="text" class="form-control" [(ngModel)]="editProduct.unitPrice" [formControl]="unitPriceCntrl">
+      <label>Unit Price</label>
+      <div class="validation-messege error" *ngIf="!unitPriceCntrl.valid">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span> Unit Price Is Required
+      </div>
+    </div>
+
+ <!-- <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="editProduct.discount">
+      <label>Discount (% value)</label>
+    </div> -->
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="editProduct.discount">
+      <label>Agreed Swyftr mark up (% value)</label>
+  </div>
+
+  <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="editProduct.sftrDiscount">
+      <label>Swyftr Fee (% value)</label>
+  </div>
+
+
+
+
+
+
+
+    <div class="button-row right-align">
+      <button type="submit" *ngIf="!updateButtonClicked" class="btn btn-default form-buttons inline-btn" (click)="onUpdateUserClicked()">Update</button>
+      <button type="submit" *ngIf="updateButtonClicked" class="btn btn-default form-buttons inline-btn">
+        <i class="fa fa-circle-o-notch fa-spin fa-1x fa-fw"></i> Updating Product...
+      </button>
+      <button type="submit" class="btn btn-danger form-buttons inline-btn" (click)="dismiss()">Cancel</button>
+    </div>
+  </div>
+</div>

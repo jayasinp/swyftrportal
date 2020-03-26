@@ -1,0 +1,21 @@
+@import "../../../../../sass/abstracts/variables";
+@import "../../../../../sass/abstracts/mixins";
+@import "../../../../../sass/abstracts/functions";
+@import "../../../../../sass/components/forms";
+
+.image-upload{
+  @extend .form-control;
+  .upload-btn {
+    display: block;
+    cursor: pointer;
+    color: #4a4a4a;
+    text-transform: capitalize;
+  }
+
+  input {
+    height: inherit;
+    width: 100%;
+    display: block;
+    opacity: 0;
+  }
+}

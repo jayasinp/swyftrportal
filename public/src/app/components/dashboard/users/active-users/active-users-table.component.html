@@ -1,0 +1,45 @@
+<div class="page-title">
+  <h3 class="pull-left">Active Users</h3>
+  <div class="clearfix"> </div>
+</div>
+<div class="tabs-cover">
+  <table datatable id="example" class="display table table-striped table-responsive" cellspacing="0" width="100%">
+    <thead  class="plain">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>NIC No.</th>
+      <th>Mobile Number</th>
+      <th>Organization</th>
+      <th *ngIf="loginUser.userType === 'partner'" >Branch</th>
+      <th>Designation</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of activeUsers">
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td style="max-width: 3.5em">{{user.nic}}</td>
+        <td style="max-width: 3.5em">{{user.mobileNo}}</td>
+        <td style="max-width: 2.5em">{{user.orgName}}</td>
+        <td *ngIf="loginUser.userType === 'partner'" style="max-width: 2.5em">{{getBranchName(user.branchId)}}</td>
+        <td style="max-width: 2.5em">{{user.designation}}</td>
+        <td>
+          <div class="btn-group action-panel">
+            <button *ngxPermissionsOnly="['SUPER_USER_SWYFTR', 'GRANT_PERMISSIONS']" type="button" class="btn btn-danger permissions" (click)="openChangeUserPermissionDialog(user)">
+              <i class="fa fa-lock" aria-hidden="true"></i> Permissions
+            </button>
+            <button type="button" class="btn btn-danger" data-target="#deactivate-User" (click)="openDeactivateUserModel(user)">
+              <i class="fa fa-ban" aria-hidden="true"></i>Dectivate
+            </button>
+            <button *ngxPermissionsOnly="['SUPER_USER_SWYFTR', 'MANAGE_USERS']" type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-User" (click)="openUpdateUserModel(user)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+            </button>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
